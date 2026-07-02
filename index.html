@@ -211,6 +211,24 @@ table.mtable tr:last-child td{border-bottom:none;}
 .class-pill.c4{background:#FAE6DE;color:#B85A33;}
 .class-pill.c5{background:#F6DEDB;color:var(--bad);}
 
+.apego-pill,.growth-pill{display:inline-flex;align-items:center;justify-content:center;gap:5px;border-radius:20px;padding:4px 10px;font-size:11.5px;font-weight:800;line-height:1.05;white-space:nowrap;}
+.apego-pill.small,.growth-pill.small{font-size:10.5px;padding:3px 8px;}
+.eval-scale{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:7px;font-size:10.7px;color:#33403E;line-height:1.2;}
+.eval-scale.inline{margin-top:0;margin-left:2px;}
+.eval-scale .scale-title{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-right:2px;}
+.eval-scale .scale-item{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;font-weight:700;}
+.eval-scale .scale-dot{width:9px;height:9px;border-radius:50%;display:inline-block;box-shadow:0 0 0 1px rgba(0,0,0,.08);}
+.rating-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.rating-line .eval-scale{flex-basis:100%;margin-top:2px;}
+.kpi-mini .eval-scale{justify-content:center;gap:5px;margin-top:6px;font-size:9.5px;}
+.kpi-mini .eval-scale .scale-title{display:none;}
+.apego-pill.ba,.growth-pill.operativa{background:#C74A44;color:#fff;}
+.apego-pill.reservas,.growth-pill.funcional{background:#D9A441;color:#fff;}
+.apego-pill.adecuado{background:#E8C55B;color:#3A2C04;}
+.apego-pill.optimo{background:#59C5B8;color:#073B38;}
+.apego-pill.sobresaliente,.growth-pill.crecimiento{background:#4FAE58;color:#fff;}
+.rating-line .big{margin:0;}
+
 .growth-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px;}
 .growth-cell{border-radius:10px;padding:10px 8px;text-align:center;}
 .growth-cell .gv{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;}
@@ -475,6 +493,20 @@ table.ranking-table tr:hover{background:#FAF8F2;}
 #btn-update, #file-input, #update-status, #vista-toggle{display:none !important;}
 #area-banner{display:none !important;}
 body.presentation-active #vista-toggle{display:none !important;}
+
+
+
+/* === AJUSTE FINAL ESCALAS === */
+.eval-scale.apego-scale{margin-top:10px!important;}
+.eval-scale.growth-scale{margin-top:14px!important;}
+.apego-title{
+ display:block;
+ margin-top:8px;
+ margin-bottom:6px;
+ font-size:12px;
+ font-weight:700;
+ color:var(--muted);
+}
 
 </style>
 </head>
@@ -1062,6 +1094,20 @@ body.presentation-active #vista-toggle{display:none !important;}
 #btn-update, #file-input, #update-status, #vista-toggle{display:none !important;}
 #area-banner{display:none !important;}
 body.presentation-active #vista-toggle{display:none !important;}
+
+
+
+/* === AJUSTE FINAL ESCALAS === */
+.eval-scale.apego-scale{margin-top:10px!important;}
+.eval-scale.growth-scale{margin-top:14px!important;}
+.apego-title{
+ display:block;
+ margin-top:8px;
+ margin-bottom:6px;
+ font-size:12px;
+ font-weight:700;
+ color:var(--muted);
+}
 
 </style>
   <div id="grafico-export-root" style="display: none;">
@@ -2423,6 +2469,51 @@ function pctBadge(pct){
   const k = colorKey(pct);
   return `<span class="pct-badge ${k}">${fmtPct(pct)}</span>`;
 }
+
+function apegoBand(pct){
+  if(pct===null || pct===undefined || Number.isNaN(Number(pct))) return {key:"sd", label:"Sin datos", short:"Sin datos", color:"#6B6A63", bg:"#EFEBE2", text:"#1B1F22"};
+  if(pct < 0.61) return {key:"ba", label:"Baja adecuación", short:"Baja adecuación", color:"#C74A44", bg:"#C74A44", text:"#fff"};
+  if(pct < 0.71) return {key:"reservas", label:"Con Reservas", short:"Con Reservas", color:"#D9A441", bg:"#D9A441", text:"#fff"};
+  if(pct < 0.78) return {key:"adecuado", label:"Adecuado", short:"Adecuado", color:"#E8C55B", bg:"#E8C55B", text:"#3A2C04"};
+  if(pct < 0.87) return {key:"optimo", label:"Óptimo", short:"Óptimo", color:"#59C5B8", bg:"#59C5B8", text:"#073B38"};
+  return {key:"sobresaliente", label:"Sobresaliente", short:"Sobresaliente", color:"#4FAE58", bg:"#4FAE58", text:"#fff"};
+}
+function apegoPill(pct, small=false){
+  const b = apegoBand(pct);
+  return `<span class="apego-pill ${b.key}${small?' small':''}" title="${fmtPct(pct)} · ${b.label}">${b.label}</span>`;
+}
+function growthBand(pct){
+  if(pct===null || pct===undefined || Number.isNaN(Number(pct))) return {key:"sd", label:"Sin datos", color:"#6B6A63", bg:"#EFEBE2", text:"#1B1F22"};
+  if(pct < 0.61) return {key:"operativa", label:"Mentalidad Operativa", color:"#C74A44", bg:"#F6DEDB", text:"#C74A44"};
+  if(pct < 0.86) return {key:"funcional", label:"Mentalidad Funcional", color:"#D9A441", bg:"#FBF1DC", text:"#B4831A"};
+  return {key:"crecimiento", label:"Mentalidad en Crecimiento", color:"#4FAE58", bg:"#E1F0E6", text:"#1E7A4C"};
+}
+function growthPill(pct, small=false){
+  const b = growthBand(pct);
+  return `<span class="growth-pill ${b.key}${small?' small':''}" title="${fmtPct(pct)} · ${b.label}">${b.label}</span>`;
+}
+function growthPctBadge(pct){
+  if(pct===null || pct===undefined) return '<span class="vs-mini-value">N/D</span>';
+  const b = growthBand(pct);
+  return `<span class="pct-badge" style="color:${b.text};background:${b.bg};">${fmtPct(pct)}</span>`;
+}
+function scaleItem(color, label){ return `<span class="scale-item"><i class="scale-dot" style="background:${color}"></i>${label}</span>`; }
+function apegoScaleLegend(inline=false){
+  return `<span class="eval-scale ${inline?'inline':''}"><span class="scale-title">Escala apego:</span>`+
+    scaleItem('#C74A44','0–60 Baja adecuación')+
+    scaleItem('#D9A441','61–70 Con Reservas')+
+    scaleItem('#E8C55B','71–77 Adecuado')+
+    scaleItem('#59C5B8','78–86 Óptimo')+
+    scaleItem('#4FAE58','87–100 Sobresaliente')+
+    `</span>`;
+}
+function growthScaleLegend(inline=false){
+  return `<span class="eval-scale ${inline?'inline':''}"><span class="scale-title">Escala mentalidad:</span>`+
+    scaleItem('#C74A44','0–60 Operativa')+
+    scaleItem('#D9A441','61–85 Funcional')+
+    scaleItem('#4FAE58','86–100 En crecimiento')+
+    `</span>`;
+}
 /* Badge para "Venta vs Año Anterior": rojo <100%, amarillo 100-104%, verde ≥105%.
    No reutiliza pctBadge/colorKey porque esos umbrales (70%/86%) están pensados
    para porcentajes de 0-100% (apego/competencias), no para una razón centrada en 100%. */
@@ -2919,9 +3010,8 @@ function renderSoftAvailable(emp){
       <div class="gauge-row">
         ${gaugeArc(s.apego, s.metaPerfil)}
         <div class="gauge-num">
-          <div class="big" style="color:${COLOR_VAR[k]}">${fmtPct(s.apego)}</div>
+          <div class="rating-line"><div class="big" style="color:${apegoBand(s.apego).color}">${fmtPct(s.apego)}</div>${apegoPill(s.apego)}${apegoScaleLegend(true)}</div>
           <div class="meta">Apego al perfil</div>
-          <span class="class-pill c${classNum(s.clasificacionPsico)}">${s.clasificacionPsico || 'Sin clasificación'}</span>
         </div>
       </div>`;
   } else {
@@ -2937,8 +3027,8 @@ function renderSoftAvailable(emp){
   if(s.growthAvailable){
     const g = s.growth;
     const cell = (v,label) => {
-      const k = colorKey(v);
-      return `<div class="growth-cell" style="background:${COLOR_BG[k]}"><div class="gv" style="color:${COLOR_VAR[k]}">${fmtPct(v)}</div><div class="gl">${label}</div></div>`;
+      const b = growthBand(v);
+      return `<div class="growth-cell" style="background:${b.bg}"><div class="gv" style="color:${b.text}">${fmtPct(v)}</div><div class="gl">${label}</div></div>`;
     };
     growthBlock = `
       <div class="section-label">Encuesta Growth &middot; mentalidad</div>
@@ -2949,8 +3039,9 @@ function renderSoftAvailable(emp){
         ${cell(g.digital,"Digitalización &amp; Eficiencia")}
       </div>
       <div style="margin-top:8px;font-size:12.3px;color:var(--muted)">
-        Promedio Growth: ${pctBadge(g.promedio)} &middot;
-        <span class="class-pill c${classNum(g.clasificacion)}">${g.clasificacion}</span>
+        Promedio Growth: ${growthPctBadge(g.promedio)} &middot;
+        ${growthPill(g.promedio)}
+        ${growthScaleLegend(true)}
       </div>`;
   } else {
     growthBlock = `
@@ -3272,16 +3363,11 @@ function renderAreaSoft(group, summary){
   const avg = arr => arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : null;
   const avgField = field => avg(withGrowth.map(e=>e.soft.growth[field]).filter(v=>v!==null && v!==undefined));
   const growthAvg = avgField("promedio");
-  const growthClass = v => {
-    if(v===null || v===undefined) return "3. Sin datos";
-    if(v >= 0.85) return "1. Mentalidad Crecimiento";
-    if(v >= 0.70) return "2. Mentalidad Funcional";
-    return "3. Mentalidad Operativa";
-  };
+  const growthClass = v => growthBand(v).label;
   const cell = (v,label) => {
     if(v===null || v===undefined) return `<div class="growth-cell" style="background:#F4F1EA"><div class="gv" style="color:var(--muted)">N/D</div><div class="gl">${label}</div></div>`;
-    const k = colorKey(v);
-    return `<div class="growth-cell" style="background:${COLOR_BG[k]}"><div class="gv" style="color:${COLOR_VAR[k]}">${fmtPct(v)}</div><div class="gl">${label}</div></div>`;
+    const b = growthBand(v);
+    return `<div class="growth-cell" style="background:${b.bg}"><div class="gv" style="color:${b.text}">${fmtPct(v)}</div><div class="gl">${label}</div></div>`;
   };
 
   const compMap = new Map();
@@ -3323,8 +3409,8 @@ function renderAreaSoft(group, summary){
 
   document.getElementById("area-soft-body").innerHTML = `
     <div class="kpi-mini-grid">
-      <div class="kpi-mini soft-tone"><div class="km-val">${summary.apegoAvg!==null ? fmtPct(summary.apegoAvg) : "N/D"}</div><div class="km-lbl">Apego al perfil prom.</div></div>
-      <div class="kpi-mini soft-tone"><div class="km-val">${growthAvg!==null ? fmtPct(growthAvg) : "N/D"}</div><div class="km-lbl">Promedio Growth</div></div>
+      <div class="kpi-mini soft-tone"><div class="km-val" style="color:${summary.apegoAvg!==null ? apegoBand(summary.apegoAvg).color : 'var(--muted)'}">${summary.apegoAvg!==null ? fmtPct(summary.apegoAvg) : "N/D"}</div><div class="km-lbl">Apego al perfil prom.</div><div style="margin-top:5px">${summary.apegoAvg!==null ? apegoPill(summary.apegoAvg,true) : ""}</div>${summary.apegoAvg!==null ? apegoScaleLegend() : ""}</div>
+      <div class="kpi-mini soft-tone"><div class="km-val" style="color:${growthAvg!==null ? growthBand(growthAvg).text : 'var(--muted)'}">${growthAvg!==null ? fmtPct(growthAvg) : "N/D"}</div><div class="km-lbl">Promedio Growth</div><div style="margin-top:5px">${growthAvg!==null ? growthPill(growthAvg,true) : ""}</div>${growthAvg!==null ? growthScaleLegend() : ""}</div>
       <div class="kpi-mini soft-tone"><div class="km-val">${withGrowth.length}</div><div class="km-lbl">Evaluaciones Growth</div></div>
     </div>
 
@@ -3336,8 +3422,9 @@ function renderAreaSoft(group, summary){
       ${cell(avgField("digital"),"Digitalización &amp; Eficiencia")}
     </div>
     <div style="margin-top:8px;font-size:12.3px;color:var(--muted)">
-      Promedio Growth: ${growthAvg!==null ? pctBadge(growthAvg) : '<span class="vs-mini-value">N/D</span>'} &middot;
-      <span class="class-pill c${classNum(growthClass(growthAvg))}">${growthClass(growthAvg)}</span>
+      Promedio Growth: ${growthAvg!==null ? growthPctBadge(growthAvg) : '<span class="vs-mini-value">N/D</span>'} &middot;
+      ${growthAvg!==null ? growthPill(growthAvg) : '<span class="vs-mini-value">Sin datos</span>'}
+      ${growthAvg!==null ? growthScaleLegend(true) : ''}
     </div>
 
     <div class="section-label">Promedio por competencia &middot; resultado vs perfil objetivo (Pyxoom) &middot; mayor a menor apego</div>
@@ -3584,12 +3671,8 @@ function gvApegoColor(v){
 }
 function gvProfileBand(v){
   if(v==null || isNaN(v)) return {label:"N/D", bg:"#FBFAF6", fg:"#8D877A"};
-  const pct = Number(v)*100;
-  if(pct <= 60) return {label:"Baja adecuación", bg:"#C74A44", fg:"#FFFFFF"};
-  if(pct <= 70) return {label:"Con Reservas", bg:"#D9A441", fg:"#1B1F22"};
-  if(pct <= 77) return {label:"Adecuado", bg:"#E8C55B", fg:"#1B1F22"};
-  if(pct <= 86) return {label:"Óptimo", bg:"#59C5B8", fg:"#073B38"};
-  return {label:"Sobresaliente", bg:"#4FAE58", fg:"#FFFFFF"};
+  const b = apegoBand(v);
+  return {label:b.label, bg:b.bg, fg:b.text};
 }
 function gvApegoCell(v){
   if(v==null || isNaN(v)) return `<td class="gv-apego" style="background:#FBFAF6;color:#8D877A"><div class="gv-apego-cell"><span class="pct">N/D</span><span class="label">Sin dato</span></div></td>`;
