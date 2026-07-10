@@ -3,7 +3,7 @@
 <html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TRANSFORMAR · One Page Mentalidad + KPI's · Jomar Autopartes</title>
+<title>TRANSFORMAR · One Page Mentalidad + KPI's · Jomar Autopartes · Perfilamiento v2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
@@ -496,17 +496,76 @@ body.presentation-active #vista-toggle{display:none !important;}
 
 
 
-/* === AJUSTE FINAL ESCALAS === */
-.eval-scale.apego-scale{margin-top:10px!important;}
-.eval-scale.growth-scale{margin-top:14px!important;}
-.apego-title{
- display:block;
- margin-top:8px;
- margin-bottom:6px;
- font-size:12px;
- font-weight:700;
- color:var(--muted);
+/* === AJUSTES FINALES · ESCALAS Y MAPA === */
+.gauge-num .apego-meta-label{
+  margin-top:6px;
+  margin-bottom:6px;
+  font-size:12px;
+  color:var(--muted);
 }
+.gauge-num .apego-scale{
+  margin-top:2px!important;
+}
+.growth-scale-spacer{
+  display:block;
+  margin-top:12px;
+  margin-bottom:12px;
+}
+.growth-scale-spacer .eval-scale{
+  margin-top:0!important;
+}
+.kpi-mini .growth-scale{
+  margin-top:8px!important;
+}
+
+
+
+/* === PERFILAMIENTO ADMIN · Comparativo automático de competencias === */
+.profile-admin-btn{background:linear-gradient(135deg,var(--amber),#9F5B1E)!important;}
+#profile-admin-root{display:none;}
+.pa-hero{background:linear-gradient(135deg,var(--hard-deep) 0%,#0A4744 48%,var(--amber) 120%);border-radius:18px;padding:22px 26px;color:#F4F1EA;margin-bottom:18px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+.pa-hero h2{margin:0;font-family:'Space Grotesk',sans-serif;font-size:23px;}
+.pa-hero p{margin:4px 0 0;font-size:13px;opacity:.88;line-height:1.45;max-width:860px;}
+.pa-controls{display:grid;grid-template-columns:1.4fr 1fr auto;gap:12px;align-items:end;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:18px;}
+.pa-controls label{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:800;display:block;margin-bottom:5px;}
+.pa-controls select{width:100%;max-width:none;}
+.pa-chip{display:inline-flex;align-items:center;gap:7px;border-radius:20px;padding:6px 11px;font-size:11px;font-weight:800;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.24);}
+.pa-grid{display:grid;grid-template-columns:minmax(420px,.95fr) minmax(520px,1.05fr);gap:18px;align-items:start;}
+@media(max-width:980px){.pa-controls{grid-template-columns:1fr}.pa-grid{grid-template-columns:1fr;}}
+.pa-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;}
+.pa-card h3{margin:0 0 5px;font-family:'Space Grotesk',sans-serif;font-size:16px;color:var(--hard-deep);}
+.pa-sub{font-size:12px;color:var(--muted);line-height:1.45;margin:0 0 12px;}
+.pa-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:10px 0 14px;}
+.pa-kpi{border-radius:10px;background:var(--hard-soft);padding:11px 12px;text-align:center;}
+.pa-kpi .v{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;}
+.pa-kpi .l{font-size:9.5px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.04em;}
+.pa-rank{display:flex;flex-direction:column;gap:8px;}
+.pa-rank-row{display:grid;grid-template-columns:28px minmax(160px,1fr) 74px 70px;gap:8px;align-items:center;padding:9px 10px;border-radius:10px;background:#FAF8F2;border:1px solid #EFEDE5;cursor:pointer;}
+.pa-rank-row:hover{border-color:var(--amber);}
+.pa-rank-row.active{box-shadow:inset 0 0 0 2px var(--amber);background:#FFF8EC;}
+.pa-pos{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:900;color:var(--muted);}
+.pa-role{font-weight:800;font-size:12.4px;line-height:1.2;}
+.pa-score{text-align:right;font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:17px;}
+.pa-cov{text-align:right;font-size:10.5px;color:var(--muted);font-weight:800;}
+.pa-bar{height:10px;background:#EFEAE3;border-radius:8px;overflow:hidden;margin-top:5px;grid-column:2/5;}
+.pa-bar > i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--bad),var(--warn),var(--good));}
+.pa-comp-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+.pa-comp-table th{font-size:9.6px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;text-align:left;padding:7px;border-bottom:2px solid var(--line);}
+.pa-comp-table td{padding:7px;border-bottom:1px solid #EFEDE5;vertical-align:middle;}
+.pa-comp-table th:nth-child(n+3),.pa-comp-table td:nth-child(n+3){text-align:right;font-family:'JetBrains Mono',monospace;}
+.pa-pill{display:inline-block;border-radius:20px;padding:3px 8px;font-size:10.5px;font-weight:900;}
+.pa-pill.green{background:var(--good-bg);color:var(--good);}.pa-pill.yellow{background:var(--warn-bg);color:var(--warn);}.pa-pill.red{background:var(--bad-bg);color:var(--bad);}
+.pa-note{margin-top:10px;font-size:11.5px;color:var(--muted);line-height:1.5;border-top:1px dashed var(--line);padding-top:10px;}
+.pa-final-card{margin-top:14px;border:1px solid var(--line);border-radius:12px;background:#FBFAF6;padding:13px 15px;}
+.pa-final-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:10px;}
+.pa-final-title{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:800;color:var(--hard-deep);}
+.pa-final-score{font-family:'Space Grotesk',sans-serif;font-size:25px;font-weight:900;line-height:1;text-align:right;}
+.pa-final-meta{font-size:10.5px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.04em;margin-top:3px;text-align:right;}
+.pa-final-break{display:flex;flex-direction:column;gap:7px;font-size:12px;}
+.pa-final-row{display:flex;justify-content:space-between;gap:12px;align-items:center;}
+.pa-final-row span:first-child{font-weight:700;color:var(--ink);}
+.pa-final-row small{color:var(--muted);font-weight:500;}
+.pa-final-note{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);font-size:11.2px;color:var(--muted);line-height:1.45;}
 
 </style>
 </head>
@@ -526,8 +585,8 @@ body.presentation-active #vista-toggle{display:none !important;}
         <select id="view-mode">
           <option value="colaborador">Por Colaborador</option>
           <option value="area">Por Área (Resumen Estratégico)</option>
-          <option value="visual">📊 Tablero Visual</option>
-          <option value="grafico">📈 Gráfico Visual · Apego por Competencia</option>
+          <option value="visual">Mapa KPI × Apego</option>
+          <option value="grafico">Gráfico Visual · Apego por Competencia</option>
         </select>
       </div>
       <div id="colaborador-controls" style="display: block;">
@@ -549,6 +608,7 @@ body.presentation-active #vista-toggle{display:none !important;}
       <div class="export-buttons">
         <button id="btn-png" class="export-btn" type="button">⬇ Imagen (PNG)</button>
         <button id="btn-pdf" class="export-btn pdf" type="button">⬇ PDF</button>
+        <button id="btn-profile-admin" class="export-btn profile-admin-btn" type="button">👤 Perfilamiento Admin</button>
       </div>
     </div>
     </div>
@@ -927,6 +987,41 @@ body.presentation-active #vista-toggle{display:none !important;}
     </div>
   </div>
 
+
+  <!-- ===== PERFILAMIENTO ADMIN ===== -->
+  <div id="profile-admin-root">
+    <div class="pa-hero">
+      <div>
+        <h2>Perfilamiento Admin · Comparativo automático por competencias</h2>
+        <p>Compara a la persona seleccionada contra cualquier perfil cargado en la base. Esta vista recalcula únicamente <b>apego al perfil por competencias</b>; no modifica KPIs, Growth ni indicadores del one page.</p>
+      </div>
+      <span class="pa-chip">Sólo competencias · Pyxoom vs Perfil objetivo</span>
+    </div>
+    <div class="pa-controls">
+      <div><label for="pa-person-select">Persona a perfilar</label><select id="pa-person-select"></select></div>
+      <div><label for="pa-profile-select">Perfil objetivo</label><select id="pa-profile-select"></select></div>
+      <div><button id="pa-back" class="export-btn" type="button">← Volver al One Page</button></div>
+    </div>
+    <div class="pa-grid">
+      <div class="pa-card">
+        <h3>Ranking de ajuste por puesto</h3>
+        <p class="pa-sub">Ordenado de mayor a menor apego. El mejor perfil se calcula con el promedio de competencias objetivo del puesto.</p>
+        <div id="pa-ranking" class="pa-rank"></div>
+      </div>
+      <div class="pa-card">
+        <h3 id="pa-detail-title">Detalle del perfil seleccionado</h3>
+        <p class="pa-sub" id="pa-detail-sub"></p>
+        <div class="pa-kpis">
+          <div class="pa-kpi"><div class="v" id="pa-kpi-score">N/D</div><div class="l">Apego al perfil</div></div>
+          <div class="pa-kpi"><div class="v" id="pa-kpi-rank">N/D</div><div class="l">Ranking</div></div>
+          <div class="pa-kpi"><div class="v" id="pa-kpi-coverage">N/D</div><div class="l">Cobertura</div></div>
+        </div>
+        <div id="pa-detail-table"></div>
+        <div id="pa-final-score"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== TABLERO VISUAL ===== -->
   <div id="visual-export-root" style="display: none;">
     <div class="visual-intro">
@@ -1046,6 +1141,31 @@ body.presentation-active #vista-toggle{display:none !important;}
     table.gv-matrix tbody td.gv-na{color:#C9C3B4;font-weight:500;background:#FBFAF6;}
     table.gv-matrix tbody td.gv-apego{font-weight:800;font-size:12.5px;}
     table.gv-matrix tbody tr:hover td:not(.gv-name):not(.gv-apego){filter:brightness(.97);}
+
+    /* Resumen final del gráfico visual */
+    table.gv-matrix tfoot td{position:sticky;bottom:0;z-index:3;background:#F8F6EF;border-top:2px solid #003087;border-right:1px solid #E7E1D6;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:900;height:38px;text-align:center;box-shadow:0 -2px 0 rgba(0,48,135,.04);}
+    table.gv-matrix tfoot td.gv-summary-label{position:sticky;left:0;z-index:5;background:#F8F6EF;text-align:left;padding:8px 12px 8px 14px;color:#003087;font-family:'Inter',sans-serif;text-transform:uppercase;letter-spacing:.04em;border-right:2px solid #003087;}
+    table.gv-matrix tfoot td.gv-apego{right:288px;min-width:110px;border-left:2px solid #003087;}
+    table.gv-matrix tfoot td.gv-kpi{position:sticky;z-index:4;background:#F8F6EF;min-width:72px;}
+    table.gv-matrix tfoot td.gv-kpi-general{right:216px;}
+    table.gv-matrix tfoot td.gv-kpi-publico{right:144px;}
+    table.gv-matrix tfoot td.gv-kpi-talleres{right:72px;}
+    table.gv-matrix tfoot td.gv-kpi-clientes{right:0;}
+    .gv-summary-cards{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:8px;margin-top:12px;}
+    .gv-summary-card{background:#FAF8F2;border:1px solid var(--line);border-radius:10px;padding:9px 11px;text-align:center;}
+    .gv-summary-card .gvsc-label{font-size:9.5px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.04em;line-height:1.15;}
+    .gv-summary-card .gvsc-value{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:900;color:#003087;margin-top:2px;}
+    .gv-summary-card .gvsc-sub{font-size:9.5px;color:var(--muted);margin-top:1px;}
+    table.gv-matrix thead th.gv-comp{height:178px;min-width:38px;padding:0 0 10px;}
+    table.gv-matrix thead th.gv-comp > span{font-size:11.2px;font-weight:900;color:#2E2B23;letter-spacing:.005em;line-height:1.08;max-height:168px;text-rendering:geometricPrecision;-webkit-font-smoothing:antialiased;}
+    #grafico-export-root.gv-exporting table.gv-matrix tfoot td{position:static!important;right:auto!important;height:24px;font-size:8.8px;padding:0 2px;}
+    #grafico-export-root.gv-exporting table.gv-matrix tfoot td.gv-summary-label{position:static!important;min-width:220px;max-width:220px;padding:3px 7px;font-size:8.2px;}
+    #grafico-export-root.gv-exporting .gv-summary-cards{grid-template-columns:repeat(5,1fr);gap:5px;margin-top:7px;}
+    #grafico-export-root.gv-exporting .gv-summary-card{padding:5px 7px;border-radius:7px;}
+    #grafico-export-root.gv-exporting .gv-summary-card .gvsc-label{font-size:7.4px;}
+    #grafico-export-root.gv-exporting .gv-summary-card .gvsc-value{font-size:13px;}
+    #grafico-export-root.gv-exporting .gv-summary-card .gvsc-sub{font-size:7.2px;}
+
     .gv-foot{font-size:10.5px;color:var(--muted);margin-top:10px;line-height:1.5;}
     .gv-foot b{color:#003087;}
     #grafico-export-root:fullscreen{background:#fff;overflow:auto;padding:26px;}
@@ -1097,16 +1217,26 @@ body.presentation-active #vista-toggle{display:none !important;}
 
 
 
-/* === AJUSTE FINAL ESCALAS === */
-.eval-scale.apego-scale{margin-top:10px!important;}
-.eval-scale.growth-scale{margin-top:14px!important;}
-.apego-title{
- display:block;
- margin-top:8px;
- margin-bottom:6px;
- font-size:12px;
- font-weight:700;
- color:var(--muted);
+/* === AJUSTES FINALES · ESCALAS Y MAPA === */
+.gauge-num .apego-meta-label{
+  margin-top:6px;
+  margin-bottom:6px;
+  font-size:12px;
+  color:var(--muted);
+}
+.gauge-num .apego-scale{
+  margin-top:2px!important;
+}
+.growth-scale-spacer{
+  display:block;
+  margin-top:12px;
+  margin-bottom:12px;
+}
+.growth-scale-spacer .eval-scale{
+  margin-top:0!important;
+}
+.kpi-mini .growth-scale{
+  margin-top:8px!important;
 }
 
 </style>
@@ -2226,6 +2356,7 @@ function buildData(raw){
   return employees;
 }
 let DATA = buildData(RAW);
+const PROFILE_DEFS = [{"Puesto":"Analista de Precios","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":4},{"Puesto":"Analista de Precios","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":4},{"Puesto":"Analista de Precios","Tipo":"OPERATIVAS","Competencia":"Control de Actividades","Nivel":3.5},{"Puesto":"Analista de Precios","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":4},{"Puesto":"Analista de Precios","Tipo":"OPERATIVAS","Competencia":"Sensibilidad a Lineamientos","Nivel":3.5},{"Puesto":"Analista de Precios","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4},{"Puesto":"Analista de Precios","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":3.5},{"Puesto":"Analista de Precios","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":5},{"Puesto":"Analista de Precios","Tipo":"SOCIALES","Competencia":"Negociación","Nivel":4.5},{"Puesto":"Analista de Precios","Tipo":"FUNCIONALES","Competencia":"Organización","Nivel":4},{"Puesto":"Analista de Precios","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4},{"Puesto":"Analista de Precios","Tipo":"FUNCIONALES","Competencia":"Responsabilidad","Nivel":4},{"Puesto":"Analista de Precios","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4.5},{"Puesto":"Desarrollador","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":5},{"Puesto":"Desarrollador","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":3},{"Puesto":"Desarrollador","Tipo":"OPERATIVAS","Competencia":"Aprendizaje","Nivel":4},{"Puesto":"Desarrollador","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":3.5},{"Puesto":"Desarrollador","Tipo":"OPERATIVAS","Competencia":"Control de Actividades","Nivel":4},{"Puesto":"Desarrollador","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":3.5},{"Puesto":"Desarrollador","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":4.5},{"Puesto":"Desarrollador","Tipo":"FUNCIONALES","Competencia":"Organización","Nivel":3.5},{"Puesto":"Desarrollador","Tipo":"OPERATIVAS","Competencia":"Orientación al Servicio","Nivel":4},{"Puesto":"Desarrollador","Tipo":"FUNCIONALES","Competencia":"Responsabilidad","Nivel":5},{"Puesto":"Desarrollador","Tipo":"OPERATIVAS","Competencia":"Sensibilidad a Lineamientos","Nivel":3},{"Puesto":"Desarrollador","Tipo":"OPERATIVAS","Competencia":"Trabajo en Equipo","Nivel":3.5},{"Puesto":"Dirección Category Management","Tipo":"ESTRATÉGICAS","Competencia":"Pensamiento Estratégico","Nivel":5},{"Puesto":"Dirección Category Management","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4.5},{"Puesto":"Dirección Category Management","Tipo":"SOCIALES","Competencia":"Negociación","Nivel":4},{"Puesto":"Dirección Category Management","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":4},{"Puesto":"Dirección Category Management","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":4},{"Puesto":"Dirección Category Management","Tipo":"SOCIALES","Competencia":"Persuasión","Nivel":4},{"Puesto":"Dirección Category Management","Tipo":"FUNCIONALES","Competencia":"Iniciativa","Nivel":4},{"Puesto":"Dirección Category Management","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":4},{"Puesto":"Dirección Category Management","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4},{"Puesto":"Dirección Category Management","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":4},{"Puesto":"Dirección Category Management","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":3.5},{"Puesto":"Dirección Category Management","Tipo":"SOCIALES","Competencia":"Enfoque a Ventas","Nivel":3.5},{"Puesto":"Dirección Category Management","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":3.5},{"Puesto":"Dirección de Ventas","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4.5},{"Puesto":"Dirección de Ventas","Tipo":"ESTRATÉGICAS","Competencia":"Pensamiento Estratégico","Nivel":5},{"Puesto":"Dirección de Ventas","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4},{"Puesto":"Dirección de Ventas","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":4.5},{"Puesto":"Dirección de Ventas","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":4.5},{"Puesto":"Dirección de Ventas","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":4.5},{"Puesto":"Dirección de Ventas","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":4.5},{"Puesto":"Dirección de Ventas","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":4.5},{"Puesto":"Dirección de Ventas","Tipo":"FUNCIONALES","Competencia":"Organización","Nivel":4},{"Puesto":"Dirección de Ventas","Tipo":"SOCIALES","Competencia":"Enfoque a Ventas","Nivel":4},{"Puesto":"Dirección de Ventas","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":4},{"Puesto":"Dirección de Ventas","Tipo":"SOCIALES","Competencia":"Persuasión","Nivel":4},{"Puesto":"Dirección de Ventas","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4},{"Puesto":"Dirección Recursos Humanos","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":4},{"Puesto":"Dirección Recursos Humanos","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":4},{"Puesto":"Dirección Recursos Humanos","Tipo":"FUNCIONALES","Competencia":"Delegación","Nivel":4},{"Puesto":"Dirección Recursos Humanos","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":5},{"Puesto":"Dirección Recursos Humanos","Tipo":"FUNCIONALES","Competencia":"Empowerment","Nivel":3.5},{"Puesto":"Dirección Recursos Humanos","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":4},{"Puesto":"Dirección Recursos Humanos","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":4.5},{"Puesto":"Dirección Recursos Humanos","Tipo":"INTRAPERSONALES","Competencia":"Manejo de Conflictos","Nivel":4},{"Puesto":"Dirección Recursos Humanos","Tipo":"SOCIALES","Competencia":"Negociación","Nivel":4},{"Puesto":"Dirección Recursos Humanos","Tipo":"ESTRATÉGICAS","Competencia":"Pensamiento Estratégico","Nivel":4.5},{"Puesto":"Dirección Recursos Humanos","Tipo":"SOCIALES","Competencia":"Persuasión","Nivel":4},{"Puesto":"Dirección Recursos Humanos","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4.5},{"Puesto":"Dirección Recursos Humanos","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4.5},{"Puesto":"Gerente de Categoría","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4.5},{"Puesto":"Gerente de Categoría","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":4},{"Puesto":"Gerente de Categoría","Tipo":"SOCIALES","Competencia":"Negociación","Nivel":4},{"Puesto":"Gerente de Categoría","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":4},{"Puesto":"Gerente de Categoría","Tipo":"OPERATIVAS","Competencia":"Control de Actividades","Nivel":4},{"Puesto":"Gerente de Categoría","Tipo":"INTRAPERSONALES","Competencia":"Autodesarrollo","Nivel":4},{"Puesto":"Gerente de Categoría","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":4},{"Puesto":"Gerente de Categoría","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4},{"Puesto":"Gerente de Categoría","Tipo":"SOCIALES","Competencia":"Enfoque a Ventas","Nivel":3.5},{"Puesto":"Gerente de Categoría","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":3.5},{"Puesto":"Gerente de Categoría","Tipo":"FUNCIONALES","Competencia":"Organización","Nivel":3.5},{"Puesto":"Gerente de Categoría","Tipo":"OPERATIVAS","Competencia":"Sensibilidad a Lineamientos","Nivel":3.5},{"Puesto":"Gerente de Categoría","Tipo":"SOCIALES","Competencia":"Persuasión","Nivel":3},{"Puesto":"Gerente de Tienda","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":3.5},{"Puesto":"Gerente de Tienda","Tipo":"OPERATIVAS","Competencia":"Control de Actividades","Nivel":3.5},{"Puesto":"Gerente de Tienda","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":3},{"Puesto":"Gerente de Tienda","Tipo":"INTRAPERSONALES","Competencia":"Dominio de Estrés","Nivel":4},{"Puesto":"Gerente de Tienda","Tipo":"OPERATIVAS","Competencia":"Sensibilidad a Lineamientos","Nivel":3.5},{"Puesto":"Gerente de Tienda","Tipo":"SOCIALES","Competencia":"Enfoque a Ventas","Nivel":4},{"Puesto":"Gerente de Tienda","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4.5},{"Puesto":"Gerente de Tienda","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":4},{"Puesto":"Gerente de Tienda","Tipo":"SOCIALES","Competencia":"Organización","Nivel":3.5},{"Puesto":"Gerente de Tienda","Tipo":"OPERATIVAS","Competencia":"Orientación al Servicio","Nivel":4.5},{"Puesto":"Gerente de Tienda","Tipo":"SOCIALES","Competencia":"Relaciones Interpersonales","Nivel":3},{"Puesto":"Gerente de Tienda","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":3.5},{"Puesto":"Gerente de Tienda","Tipo":"OPERATIVAS","Competencia":"Trabajo en Equipo","Nivel":3.5},{"Puesto":"Gerente de Zona","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":3.5},{"Puesto":"Gerente de Zona","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":4},{"Puesto":"Gerente de Zona","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":4},{"Puesto":"Gerente de Zona","Tipo":"SOCIALES","Competencia":"Control de Actividades","Nivel":4},{"Puesto":"Gerente de Zona","Tipo":"FUNCIONALES","Competencia":"Delegación","Nivel":3.5},{"Puesto":"Gerente de Zona","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":4.5},{"Puesto":"Gerente de Zona","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":5},{"Puesto":"Gerente de Zona","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":4.5},{"Puesto":"Gerente de Zona","Tipo":"SOCIALES","Competencia":"Negociación","Nivel":3},{"Puesto":"Gerente de Zona","Tipo":"SOCIALES","Competencia":"Organización","Nivel":3},{"Puesto":"Gerente de Zona","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4},{"Puesto":"Gerente de Zona","Tipo":"FUNCIONALES","Competencia":"Resolución de Problemas","Nivel":4},{"Puesto":"Gerente de Zona","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4},{"Puesto":"Gerente DO","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":4},{"Puesto":"Gerente DO","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":3.5},{"Puesto":"Gerente DO","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":4},{"Puesto":"Gerente DO","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":4.5},{"Puesto":"Gerente DO","Tipo":"FUNCIONALES","Competencia":"Empowerment","Nivel":4},{"Puesto":"Gerente DO","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":3.5},{"Puesto":"Gerente DO","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":4.5},{"Puesto":"Gerente DO","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":4},{"Puesto":"Gerente DO","Tipo":"INTRAPERSONALES","Competencia":"Manejo de Conflictos","Nivel":3.5},{"Puesto":"Gerente DO","Tipo":"SOCIALES","Competencia":"Negociación","Nivel":3},{"Puesto":"Gerente DO","Tipo":"SOCIALES","Competencia":"Persuasión","Nivel":4},{"Puesto":"Gerente DO","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4},{"Puesto":"Gerente DO","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4},{"Puesto":"Gerente Nacional Talleres","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":4.5},{"Puesto":"Gerente Territorial Cat","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":4.5},{"Puesto":"Gerente Territorial Interior","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":4.5},{"Puesto":"Gerente Nacional Talleres","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4.5},{"Puesto":"Gerente Territorial Cat","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4.5},{"Puesto":"Gerente Territorial Interior","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4.5},{"Puesto":"Gerente Nacional Talleres","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":4.5},{"Puesto":"Gerente Territorial Cat","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":4.5},{"Puesto":"Gerente Territorial Interior","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":4.5},{"Puesto":"Gerente Nacional Talleres","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":4},{"Puesto":"Gerente Territorial Cat","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":4},{"Puesto":"Gerente Territorial Interior","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":4},{"Puesto":"Gerente Nacional Talleres","Tipo":"FUNCIONALES","Competencia":"Delegación","Nivel":4},{"Puesto":"Gerente Territorial Cat","Tipo":"FUNCIONALES","Competencia":"Delegación","Nivel":4},{"Puesto":"Gerente Territorial Interior","Tipo":"FUNCIONALES","Competencia":"Delegación","Nivel":4},{"Puesto":"Gerente Nacional Talleres","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":4},{"Puesto":"Gerente Territorial Cat","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":4},{"Puesto":"Gerente Territorial Interior","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":4},{"Puesto":"Gerente Nacional Talleres","Tipo":"SOCIALES","Competencia":"Enfoque a Ventas","Nivel":4},{"Puesto":"Gerente Territorial Cat","Tipo":"SOCIALES","Competencia":"Enfoque a Ventas","Nivel":4},{"Puesto":"Gerente Territorial Interior","Tipo":"SOCIALES","Competencia":"Enfoque a Ventas","Nivel":4},{"Puesto":"Gerente Nacional Talleres","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4},{"Puesto":"Gerente Territorial Cat","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4},{"Puesto":"Gerente Territorial Interior","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4},{"Puesto":"Gerente Nacional Talleres","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4},{"Puesto":"Gerente Territorial Cat","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4},{"Puesto":"Gerente Territorial Interior","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4},{"Puesto":"Gerente Nacional Talleres","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":3.5},{"Puesto":"Gerente Territorial Cat","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":3.5},{"Puesto":"Gerente Territorial Interior","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":3.5},{"Puesto":"Gerente Nacional Talleres","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":3.5},{"Puesto":"Gerente Territorial Cat","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":3.5},{"Puesto":"Gerente Territorial Interior","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":3.5},{"Puesto":"Gerente Nacional Talleres","Tipo":"SOCIALES","Competencia":"Negociación","Nivel":3.5},{"Puesto":"Gerente Territorial Cat","Tipo":"SOCIALES","Competencia":"Negociación","Nivel":3.5},{"Puesto":"Gerente Territorial Interior","Tipo":"SOCIALES","Competencia":"Negociación","Nivel":3.5},{"Puesto":"Gerente Nacional Talleres","Tipo":"FUNCIONALES","Competencia":"Resolución de Problemas","Nivel":3.5},{"Puesto":"Gerente Territorial Cat","Tipo":"FUNCIONALES","Competencia":"Resolución de Problemas","Nivel":3.5},{"Puesto":"Gerente Territorial Interior","Tipo":"FUNCIONALES","Competencia":"Resolución de Problemas","Nivel":3.5},{"Puesto":"HRBP Zona","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":4},{"Puesto":"HRBP Zona","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":3.5},{"Puesto":"HRBP Zona","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":4},{"Puesto":"HRBP Zona","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":3.5},{"Puesto":"HRBP Zona","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4},{"Puesto":"HRBP Zona","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":4},{"Puesto":"HRBP Zona","Tipo":"INTRAPERSONALES","Competencia":"Manejo de Conflictos","Nivel":3.5},{"Puesto":"HRBP Zona","Tipo":"SOCIALES","Competencia":"Negociación","Nivel":4.5},{"Puesto":"HRBP Zona","Tipo":"OPERATIVAS","Competencia":"Orientación al Servicio","Nivel":3.5},{"Puesto":"HRBP Zona","Tipo":"SOCIALES","Competencia":"Persuasión","Nivel":3.5},{"Puesto":"HRBP Zona","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":3.5},{"Puesto":"HRBP Zona","Tipo":"FUNCIONALES","Competencia":"Resolución de Problemas","Nivel":3},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":3.5},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":3},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":3},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"OPERATIVAS","Competencia":"Control de Actividades","Nivel":4},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"FUNCIONALES","Competencia":"Delegación","Nivel":4},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"OPERATIVAS","Competencia":"Trabajo en Equipo","Nivel":3.5},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4.5},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":3.5},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"FUNCIONALES","Competencia":"Resolución de Problemas","Nivel":4},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"FUNCIONALES","Competencia":"Responsabilidad","Nivel":3.5},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"OPERATIVAS","Competencia":"Sensibilidad a Lineamientos","Nivel":3},{"Puesto":"Jefe en Cadena de Suministro","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4},{"Puesto":"Desarrollador","Tipo":"FUNCIONALES","Competencia":"Resolución de Problemas","Nivel":4},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":4.5},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"ESTRATÉGICAS","Competencia":"Pensamiento Estratégico","Nivel":4.5},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4.5},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4.5},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":5},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"FUNCIONALES","Competencia":"Delegación","Nivel":4},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":4},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"OPERATIVAS","Competencia":"Control de Actividades","Nivel":4},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4.5},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":4},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"FUNCIONALES","Competencia":"Resolución de Problemas","Nivel":4},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"SOCIALES","Competencia":"Negociación","Nivel":4},{"Puesto":"DIRECTOR DE CADENA DE SUMINISTRO","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":3.5},{"Puesto":"JEFE DE CEDIS","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":3.5},{"Puesto":"JEFE DE CEDIS","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":3},{"Puesto":"JEFE DE CEDIS","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":3},{"Puesto":"JEFE DE CEDIS","Tipo":"OPERATIVAS","Competencia":"Control de Actividades","Nivel":4},{"Puesto":"JEFE DE CEDIS","Tipo":"FUNCIONALES","Competencia":"Delegación","Nivel":3.5},{"Puesto":"JEFE DE CEDIS","Tipo":"OPERATIVAS","Competencia":"Trabajo en Equipo","Nivel":3.5},{"Puesto":"JEFE DE CEDIS","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4},{"Puesto":"JEFE DE CEDIS","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":3.5},{"Puesto":"JEFE DE CEDIS","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4},{"Puesto":"JEFE DE CEDIS","Tipo":"FUNCIONALES","Competencia":"Resolución de Problemas","Nivel":4},{"Puesto":"JEFE DE CEDIS","Tipo":"FUNCIONALES","Competencia":"Responsabilidad","Nivel":4},{"Puesto":"JEFE DE CEDIS","Tipo":"OPERATIVAS","Competencia":"Sensibilidad a Lineamientos","Nivel":3.5},{"Puesto":"JEFE DE CEDIS","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":3.5},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":5},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":3.5},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"OPERATIVAS","Competencia":"Aprendizaje","Nivel":4},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":4},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"OPERATIVAS","Competencia":"Control de Actividades","Nivel":4},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":4.5},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"FUNCIONALES","Competencia":"Organización","Nivel":4},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"FUNCIONALES","Competencia":"Delegación","Nivel":3.5},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"FUNCIONALES","Competencia":"Responsabilidad","Nivel":5},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"OPERATIVAS","Competencia":"Sensibilidad a Lineamientos","Nivel":3.5},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"OPERATIVAS","Competencia":"Trabajo en Equipo","Nivel":4},{"Puesto":"SUPERVISOR DE DESARROLLADORES","Tipo":"FUNCIONALES","Competencia":"Resolución de Problemas","Nivel":4},{"Puesto":"COMPRADOR","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":4},{"Puesto":"COMPRADOR","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":4},{"Puesto":"COMPRADOR","Tipo":"OPERATIVAS","Competencia":"Control de Actividades","Nivel":3.5},{"Puesto":"COMPRADOR","Tipo":"FUNCIONALES","Competencia":"Desarrollo de las Personas","Nivel":4},{"Puesto":"COMPRADOR","Tipo":"OPERATIVAS","Competencia":"Sensibilidad a Lineamientos","Nivel":3.5},{"Puesto":"COMPRADOR","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":4},{"Puesto":"COMPRADOR","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":3.5},{"Puesto":"COMPRADOR","Tipo":"FUNCIONALES","Competencia":"Liderazgo","Nivel":5},{"Puesto":"COMPRADOR","Tipo":"SOCIALES","Competencia":"Negociación","Nivel":4.5},{"Puesto":"COMPRADOR","Tipo":"FUNCIONALES","Competencia":"Organización","Nivel":4},{"Puesto":"COMPRADOR","Tipo":"FUNCIONALES","Competencia":"Planeación","Nivel":4},{"Puesto":"COMPRADOR","Tipo":"FUNCIONALES","Competencia":"Responsabilidad","Nivel":4},{"Puesto":"COMPRADOR","Tipo":"FUNCIONALES","Competencia":"Toma de Decisiones","Nivel":4.5},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"FUNCIONALES","Competencia":"Análisis de Problemas","Nivel":5},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"FUNCIONALES","Competencia":"Apertura al Cambio","Nivel":3},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"OPERATIVAS","Competencia":"Aprendizaje","Nivel":4},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"SOCIALES","Competencia":"Comunicación Oral","Nivel":3.5},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"OPERATIVAS","Competencia":"Control de Actividades","Nivel":4},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"FUNCIONALES","Competencia":"Enfoque en Resultados","Nivel":3.5},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"FUNCIONALES","Competencia":"Innovación","Nivel":4.5},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"FUNCIONALES","Competencia":"Organización","Nivel":3.5},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"OPERATIVAS","Competencia":"Orientación al Servicio","Nivel":4},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"FUNCIONALES","Competencia":"Responsabilidad","Nivel":5},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"OPERATIVAS","Competencia":"Sensibilidad a Lineamientos","Nivel":3},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"OPERATIVAS","Competencia":"Trabajo en Equipo","Nivel":3.5},{"Puesto":"DESARROLLO ACUMULADORES","Tipo":"FUNCIONALES","Competencia":"Resolución de Problemas","Nivel":4}];
 
 
 function mentalidadTier(clasifGrowth){
@@ -2499,7 +2630,7 @@ function growthPctBadge(pct){
 }
 function scaleItem(color, label){ return `<span class="scale-item"><i class="scale-dot" style="background:${color}"></i>${label}</span>`; }
 function apegoScaleLegend(inline=false){
-  return `<span class="eval-scale ${inline?'inline':''}"><span class="scale-title">Escala apego:</span>`+
+  return `<span class="eval-scale apego-scale ${inline?'inline':''}"><span class="scale-title">Escala apego:</span>`+
     scaleItem('#C74A44','0–60 Baja adecuación')+
     scaleItem('#D9A441','61–70 Con Reservas')+
     scaleItem('#E8C55B','71–77 Adecuado')+
@@ -2508,7 +2639,7 @@ function apegoScaleLegend(inline=false){
     `</span>`;
 }
 function growthScaleLegend(inline=false){
-  return `<span class="eval-scale ${inline?'inline':''}"><span class="scale-title">Escala mentalidad:</span>`+
+  return `<span class="eval-scale growth-scale ${inline?'inline':''}"><span class="scale-title">Escala mentalidad:</span>`+
     scaleItem('#C74A44','0–60 Operativa')+
     scaleItem('#D9A441','61–85 Funcional')+
     scaleItem('#4FAE58','86–100 En crecimiento')+
@@ -3010,8 +3141,9 @@ function renderSoftAvailable(emp){
       <div class="gauge-row">
         ${gaugeArc(s.apego, s.metaPerfil)}
         <div class="gauge-num">
-          <div class="rating-line"><div class="big" style="color:${apegoBand(s.apego).color}">${fmtPct(s.apego)}</div>${apegoPill(s.apego)}${apegoScaleLegend(true)}</div>
-          <div class="meta">Apego al perfil</div>
+          <div class="rating-line"><div class="big" style="color:${apegoBand(s.apego).color}">${fmtPct(s.apego)}</div>${apegoPill(s.apego)}</div>
+          <div class="meta apego-meta-label">Apego al perfil</div>
+          ${apegoScaleLegend(true)}
         </div>
       </div>`;
   } else {
@@ -3041,7 +3173,7 @@ function renderSoftAvailable(emp){
       <div style="margin-top:8px;font-size:12.3px;color:var(--muted)">
         Promedio Growth: ${growthPctBadge(g.promedio)} &middot;
         ${growthPill(g.promedio)}
-        ${growthScaleLegend(true)}
+        <div class="growth-scale-spacer">${growthScaleLegend(true)}</div>
       </div>`;
   } else {
     growthBlock = `
@@ -3424,7 +3556,7 @@ function renderAreaSoft(group, summary){
     <div style="margin-top:8px;font-size:12.3px;color:var(--muted)">
       Promedio Growth: ${growthAvg!==null ? growthPctBadge(growthAvg) : '<span class="vs-mini-value">N/D</span>'} &middot;
       ${growthAvg!==null ? growthPill(growthAvg) : '<span class="vs-mini-value">Sin datos</span>'}
-      ${growthAvg!==null ? growthScaleLegend(true) : ''}
+      ${growthAvg!==null ? `<div class="growth-scale-spacer">${growthScaleLegend(true)}</div>` : ''}
     </div>
 
     <div class="section-label">Promedio por competencia &middot; resultado vs perfil objetivo (Pyxoom) &middot; mayor a menor apego</div>
@@ -3778,8 +3910,9 @@ function renderGraficoView(){
   comps.forEach(c=> thead += `<th class="gv-comp"><span>${c}</span></th>`);
   thead += `<th class="gv-apego">Apego<br>al perfil</th><th class="gv-kpi gv-kpi-general">Venta<br>gral.</th><th class="gv-kpi gv-kpi-publico">Venta<br>público</th><th class="gv-kpi gv-kpi-talleres">Venta<br>talleres</th><th class="gv-kpi gv-kpi-clientes">Clientes<br>prom.</th></tr>`;
 
+  const rowIndicators = rows.map(r=>gvYtdIndicator(r.emp));
   let tbody = "";
-  rows.forEach(r=>{
+  rows.forEach((r,idx)=>{
     tbody += `<tr><td class="gv-name">${r.nombre}<span class="gv-suc">${r.suc||""}</span></td>`;
     comps.forEach(c=>{
       const v = r.cells[c];
@@ -3787,13 +3920,43 @@ function renderGraficoView(){
       else { const col=gvApegoColor(v);
         tbody += `<td style="background:${col.bg};color:${col.fg}">${Math.round(v*100)}%</td>`; }
     });
-    const ind = gvYtdIndicator(r.emp);
+    const ind = rowIndicators[idx];
     tbody += gvApegoCell(r.apego);
     tbody += gvKpiCell(ind.general, "gv-kpi-general") + gvKpiCell(ind.publico, "gv-kpi-publico") + gvKpiCell(ind.talleres, "gv-kpi-talleres") + gvClientesCell(ind.clientes) + `</tr>`;
   });
 
+  const gvAvg = arr => {
+    const nums = arr.filter(v=>v!=null && !isNaN(v));
+    return nums.length ? nums.reduce((a,b)=>a+b,0)/nums.length : null;
+  };
+  const compAvgs = comps.map(c=>gvAvg(rows.map(r=>r.cells[c])));
+  const avgApego = gvAvg(rows.map(r=>r.apego));
+  const avgGeneral = gvAvg(rowIndicators.map(i=>i.general));
+  const avgPublico = gvAvg(rowIndicators.map(i=>i.publico));
+  const avgTalleres = gvAvg(rowIndicators.map(i=>i.talleres));
+  const avgClientes = gvAvg(rowIndicators.map(i=>i.clientes));
+  let tfoot = `<tr><td class="gv-summary-label">Resultado general · promedio</td>`;
+  compAvgs.forEach(v=>{
+    if(v==null){ tfoot += `<td class="gv-na">N/D</td>`; }
+    else { const col=gvApegoColor(v); tfoot += `<td style="background:${col.bg};color:${col.fg}">${Math.round(v*100)}%</td>`; }
+  });
+  const bAvg = gvProfileBand(avgApego);
+  tfoot += `<td class="gv-apego" style="background:${bAvg.bg};color:${bAvg.fg}">${avgApego==null?'N/D':Math.round(avgApego*100)+'%'}</td>`;
+  tfoot += `<td class="gv-kpi gv-kpi-general ${gvRatioClass(avgGeneral)}">${gvFmtRatio(avgGeneral)}</td>`;
+  tfoot += `<td class="gv-kpi gv-kpi-publico ${gvRatioClass(avgPublico)}">${gvFmtRatio(avgPublico)}</td>`;
+  tfoot += `<td class="gv-kpi gv-kpi-talleres ${gvRatioClass(avgTalleres)}">${gvFmtRatio(avgTalleres)}</td>`;
+  tfoot += `<td class="gv-kpi gv-kpi-clientes" style="color:var(--ink)!important;">${avgClientes==null?'N/D':fmtInt(avgClientes)}</td></tr>`;
+
+  const summaryCards = `<div class="gv-summary-cards">
+    <div class="gv-summary-card"><div class="gvsc-label">Promedio competencias</div><div class="gvsc-value">${gvFmtRatio(gvAvg(compAvgs))}</div><div class="gvsc-sub">promedio del perfil</div></div>
+    <div class="gv-summary-card"><div class="gvsc-label">Apego al perfil</div><div class="gvsc-value">${avgApego==null?'N/D':Math.round(avgApego*100)+'%'}</div><div class="gvsc-sub">${bAvg.label}</div></div>
+    <div class="gv-summary-card"><div class="gvsc-label">Venta general</div><div class="gvsc-value">${gvFmtRatio(avgGeneral)}</div><div class="gvsc-sub">YTD 2026 vs 2025</div></div>
+    <div class="gv-summary-card"><div class="gvsc-label">Venta público / talleres</div><div class="gvsc-value">${gvFmtRatio(avgPublico)} / ${gvFmtRatio(avgTalleres)}</div><div class="gvsc-sub">promedio simple</div></div>
+    <div class="gv-summary-card"><div class="gvsc-label">Clientes promedio</div><div class="gvsc-value">${avgClientes==null?'N/D':fmtInt(avgClientes)}</div><div class="gvsc-sub">mensual 2026</div></div>
+  </div>`;
+
   document.getElementById("gv-tablewrap").innerHTML =
-    `<table class="gv-matrix"><thead>${thead}</thead><tbody>${tbody}</tbody></table>`;
+    `<table class="gv-matrix"><thead>${thead}</thead><tbody>${tbody}</tbody><tfoot>${tfoot}</tfoot></table>${summaryCards}`;
 
   // nota de perfiles distintos dentro del grupo (p.ej. Categoría)
   const puestosReales = [...new Set(rows.map(r=>r.puesto))];
@@ -3957,18 +4120,18 @@ function visRenderMatrix(people, rrNumberMap){
   const QDEC = {
     rr:"⚠️ Crítico: apego <75% e indicadores <100%. Intervención urgente.",
     fragil:"⚡ Talento Frágil: apego <75% e indicadores ≥100%. Alinear conducta y sostener resultado.",
-    potencial:"💡 Potencial Dormido: apego ≥75% e indicadores por debajo de 100%. Activar desempeño.",
-    estrella:"⭐ Estrella: apego ≥75% e indicadores ≥100%. Retener y desarrollar."
+    potencial:"💡 Potencial Dormido: apego ≥78% e indicadores por debajo de 100%. Activar desempeño.",
+    estrella:"⭐ Estrella: apego ≥78% e indicadores ≥100%. Retener y desarrollar."
   };
 
-  // Zoom ejecutivo solicitado: KPI 85%–115% con línea central en 100% y Apego 60%–90% con corte en 75%.
+  // Zoom ejecutivo solicitado: KPI 85%–115% con línea central en 100% y Apego 55%–100% con corte en 78%.
   // Los valores fuera de escala se fijan al borde como círculos normales, sin etiquetas.
   const KPI_MIN = 85;
   const KPI_MAX = 115;
-  const AP_MIN  = 60;
-  const AP_MAX  = 90;
+  const AP_MIN  = 55;
+  const AP_MAX  = 100;
   const KPI_SPLIT = 100;  // línea central solicitada para indicadores.
-  const AP_TH = 75;       // corte de apego al perfil.
+  const AP_TH = 78;       // corte de apego al perfil.
 
   const xSplitPct = (KPI_SPLIT - KPI_MIN)/(KPI_MAX - KPI_MIN)*100;
   const apThTop   = 100 - ((AP_TH - AP_MIN) /(AP_MAX - AP_MIN) *100);
@@ -3983,13 +4146,13 @@ function visRenderMatrix(people, rrNumberMap){
 
   // 4 cuadrantes, sin bandas intermedias ni líneas de más.
   h+=`<div class="mq-bg mq-q potencial" style="left:0;top:0;width:${xSplitPct}%;height:${apThTop}%;background:${QBGC.potencial};">
-        <span class="mq-label mq-label-large" style="color:#2C7563;left:8%;top:18%;">Potencial Dormido<span class="mq-desc">Perfil ≥75 · KPI <100</span></span></div>`;
+        <span class="mq-label mq-label-large" style="color:#2C7563;left:8%;top:18%;">Potencial Dormido<span class="mq-desc">Perfil ≥78 · KPI <100</span></span></div>`;
   h+=`<div class="mq-bg mq-q estrella" style="left:${xSplitPct}%;top:0;width:${100-xSplitPct}%;height:${apThTop}%;background:${QBGC.estrella};">
-        <span class="mq-label mq-label-large mq-label-right" style="color:#1E7A4C;right:8%;top:18%;">Estrella ★<span class="mq-desc">Perfil ≥75 · KPI ≥100</span></span></div>`;
+        <span class="mq-label mq-label-large mq-label-right" style="color:#1E7A4C;right:8%;top:18%;">Estrella ★<span class="mq-desc">Perfil ≥78 · KPI ≥100</span></span></div>`;
   h+=`<div class="mq-bg mq-q rr" style="left:0;top:${apThTop}%;width:${xSplitPct}%;height:${bottomH}%;background:${QBGC.rr};">
-        <span class="mq-label mq-label-large mq-label-bottom" style="color:#A8412F;left:8%;bottom:14%;">Rojo/Rojo<span class="mq-desc">Perfil &lt;75 · KPI &lt;100</span></span></div>`;
+        <span class="mq-label mq-label-large mq-label-bottom" style="color:#A8412F;left:8%;bottom:14%;">Rojo/Rojo<span class="mq-desc">Perfil &lt;78 · KPI &lt;100</span></span></div>`;
   h+=`<div class="mq-bg mq-q fragil" style="left:${xSplitPct}%;top:${apThTop}%;width:${100-xSplitPct}%;height:${bottomH}%;background:${QBGC.fragil};">
-        <span class="mq-label mq-label-large mq-label-right mq-label-bottom" style="color:#C8742B;right:8%;bottom:14%;">Talento Frágil<span class="mq-desc">Perfil &lt;75 · KPI ≥100</span></span></div>`;
+        <span class="mq-label mq-label-large mq-label-right mq-label-bottom" style="color:#C8742B;right:8%;bottom:14%;">Talento Frágil<span class="mq-desc">Perfil &lt;78 · KPI ≥100</span></span></div>`;
 
   // Solo 2 líneas de corte = 4 cuadrantes.
   h+=`<div class="m-vline major" style="left:${xSplitPct}%;"></div>`;
@@ -3999,7 +4162,7 @@ function visRenderMatrix(people, rrNumberMap){
   h+=`<div class="m-tick-x m-tick-edge" style="left:0%;transform:translateX(0);">${KPI_MIN}%</div>`;
   h+=`<div class="m-tick-x" style="left:${xSplitPct}%">100%</div>`;
   h+=`<div class="m-tick-x m-tick-edge" style="left:100%;transform:translateX(-100%);">${KPI_MAX}%+</div>`;
-  h+=`<div class="m-tick-y" style="top:${apThTop}%">75%</div>`;
+  h+=`<div class="m-tick-y" style="top:${apThTop}%">78%</div>`;
   h+=`<div class="m-tick-y m-tick-edge" style="top:100%;transform:translateY(-100%);">${AP_MIN}%</div>`;
   h+=`<div class="m-tick-y m-tick-edge" style="top:0%;transform:translateY(0);">${AP_MAX}%</div>`;
 
@@ -4058,7 +4221,7 @@ function visRenderMatrix(people, rrNumberMap){
     const badge = (d.quad==="rr" && rrNumberMap.has(d.id)) ? ` <span style="opacity:.7;">#${rrNumberMap.get(d.id)} en la lista Rojo/Rojo</span>` : "";
     let outNote = "";
     if(outOfRangeX) outNote += `<br><span style="font-size:10px;opacity:.8;">Valor real de KPI fuera del zoom 85–115: <b>${d.kpi.toFixed(1)}%</b>.</span>`;
-    if(outOfRangeY) outNote += `<br><span style="font-size:10px;opacity:.8;">Valor real de apego fuera del zoom 60–90: <b>${d.apego.toFixed(1)}%</b>.</span>`;
+    if(outOfRangeY) outNote += `<br><span style="font-size:10px;opacity:.8;">Valor real de apego fuera del zoom 55–100: <b>${d.apego.toFixed(1)}%</b>.</span>`;
     el.addEventListener("mouseenter", ()=>{
       tooltip.innerHTML = `<b>${d.nombre}</b><span style="opacity:.75;font-size:11px;"> · ${rm.label}</span><br>
         <span style="opacity:.7;font-size:11px;">${d.ambito}</span><br>
@@ -4195,6 +4358,9 @@ function exportFileBase(){
   if(viewMode === "grafico"){
     return `Grafico_Visual_Apego_Competencia_${today}`;
   }
+  if(viewMode === "perfilamiento"){
+    return `Perfilamiento_Admin_Jomar_${today}`;
+  }
   const emp = currentEmployee();
   const baseName = emp && emp.meta && emp.meta.nombre ? emp.meta.nombre : "Colaborador";
   const slug = baseName.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9]+/g,"_");
@@ -4240,6 +4406,11 @@ function withCanvas(callback){
     const h = Math.ceil(target.scrollHeight + 30);
     opts = { scale: 2, backgroundColor: "#FFFFFF", useCORS: true, width:w, height:h, windowWidth:w, windowHeight:h, scrollX:0, scrollY:0 };
     cleanup = ()=>{ target.classList.remove("gv-exporting"); if(wrap){ wrap.scrollTop = previousScrollTop; wrap.scrollLeft = previousScrollLeft; } };
+  } else if(viewMode === "perfilamiento"){
+    target = document.getElementById("profile-admin-root");
+    const w = Math.ceil(Math.max(target.scrollWidth, target.offsetWidth, 1180) + 30);
+    const h = Math.ceil(Math.max(target.scrollHeight, target.offsetHeight) + 30);
+    opts = { scale: 2, backgroundColor: "#F6F4EE", useCORS: true, width:w, height:h, windowWidth:w, windowHeight:h, scrollX:0, scrollY:0 };
   } else {
     target = document.getElementById("export-root");
   }
@@ -4287,6 +4458,188 @@ document.getElementById("btn-pdf").addEventListener("click", ()=>{
     setBusy(false);
   }).catch(err=>{ console.error(err); alert("No se pudo generar el PDF: " + (err && err.message ? err.message : "error desconocido")); setBusy(false); });
 });
+
+
+/* =========================================================================
+   PERFILAMIENTO ADMIN — compara persona vs perfiles de competencia cargados
+   ========================================================================= */
+function paPct(v){ return (v===null || v===undefined || isNaN(v)) ? "N/D" : Math.round(v*1000)/10 + "%"; }
+function paColor(v){ if(v===null || v===undefined || isNaN(v)) return "red"; if(v>=0.86) return "green"; if(v>=0.70) return "yellow"; return "red"; }
+function paNorm(s){ return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim().toLowerCase(); }
+function paProfiles(){
+  const m = {};
+  (PROFILE_DEFS||[]).forEach(r=>{
+    const puesto = String(r.Puesto||"").trim();
+    const comp = String(r.Competencia||"").trim();
+    const nivel = Number(r.Nivel);
+    if(!puesto || !comp || !nivel) return;
+    if(!m[puesto]) m[puesto] = [];
+    m[puesto].push({puesto, tipo:String(r.Tipo||"").trim(), competencia:comp, nivel});
+  });
+  return m;
+}
+function paResultsByCompetency(emp){
+  const nom = emp && emp.meta ? String(emp.meta.nomina) : "";
+  const out = {};
+  (RAW.pyxoom||[]).forEach(r=>{
+    if(String(r["Nómina"])!==nom) return;
+    const comp = String(r.Atributo||"").trim();
+    const val = Number(r.Respuestas);
+    if(!comp || !isFinite(val)) return;
+    const key = paNorm(comp);
+    if(!out[key] || val > out[key].resultado){
+      out[key] = {competencia:comp, resultado:val, categoria:r["Categoría"]||""};
+    }
+  });
+  return out;
+}
+function paScore(emp, puesto){
+  const profs = paProfiles();
+  const profile = profs[puesto] || [];
+  const res = paResultsByCompetency(emp);
+  let sum = 0, matched = 0;
+  const rows = profile.map(p=>{
+    const r = res[paNorm(p.competencia)];
+    const ok = !!r && isFinite(r.resultado);
+    const raw = ok ? (r.resultado / p.nivel) : 0;
+    const alineacion = Math.max(0, Math.min(raw, 1));
+    sum += alineacion;
+    if(ok) matched++;
+    return {tipo:p.tipo, competencia:p.competencia, requerido:p.nivel, resultado: ok ? r.resultado : null, alineacion, missing:!ok};
+  });
+  return {puesto, score: profile.length ? sum/profile.length : null, matched, total: profile.length, coverage: profile.length ? matched/profile.length : null, rows};
+}
+function paAllScores(emp){
+  return Object.keys(paProfiles()).map(p=>paScore(emp,p)).filter(x=>x.total>0).sort((a,b)=>(b.score||0)-(a.score||0));
+}
+function paGeneralScore(emp, softApego){
+  const rawRatio = empCumplimiento(emp);
+  const hardVal = empHardEffective(emp);
+  const mult = rawRatio!==null ? growthMultiplier(rawRatio) : null;
+  const softVal = (softApego!==null && softApego!==undefined && isFinite(softApego)) ? Math.min(softApego,1) : null;
+  const w = WEIGHT || {hard:0.6, soft:0.4};
+  let combined = null, note = "";
+  if(hardVal!==null && softVal!==null){
+    combined = hardVal*w.hard + softVal*w.soft;
+  } else if(hardVal!==null){
+    combined = hardVal*w.hard;
+    note = "Calculado sólo con indicadores: no hay apego comparable para el perfil seleccionado.";
+  } else if(softVal!==null){
+    combined = softVal;
+    note = "Calculado sólo con el nuevo apego: no hay indicadores comparables para esta persona/sucursal.";
+  }
+  return {combined, rawRatio, hardVal, mult, softVal, w, note};
+}
+function paBadgeHtml(v){ return (v===null || v===undefined || isNaN(v)) ? '<span class="vs-mini-value">N/D</span>' : pctBadge(Math.min(v,1)); }
+function paCurrentEmp(){
+  const sel = document.getElementById("pa-person-select");
+  const id = sel && sel.value ? sel.value : (document.getElementById("emp-select") ? document.getElementById("emp-select").value : null);
+  return DATA.find(e=>e.id===id) || DATA[0];
+}
+function paPopulate(){
+  const personSel = document.getElementById("pa-person-select");
+  const profileSel = document.getElementById("pa-profile-select");
+  if(!personSel || !profileSel) return;
+  if(!personSel.options.length){
+    DATA.filter(e=>e.soft && e.soft.available).forEach(e=>{
+      const opt=document.createElement("option"); opt.value=e.id; opt.textContent=(e.meta.nombre||"")+" — "+(e.meta.puesto||""); personSel.appendChild(opt);
+    });
+  }
+  if(!profileSel.options.length){
+    Object.keys(paProfiles()).sort((a,b)=>a.localeCompare(b)).forEach(p=>{ const opt=document.createElement("option"); opt.value=p; opt.textContent=p; profileSel.appendChild(opt); });
+  }
+}
+function paRender(){
+  paPopulate();
+  const emp = paCurrentEmp();
+  const psel = document.getElementById("pa-profile-select");
+  const scores = paAllScores(emp);
+  if(!psel.value && scores[0]) psel.value = scores[0].puesto;
+  const selected = psel.value || (scores[0]&&scores[0].puesto);
+  const detail = scores.find(x=>x.puesto===selected) || paScore(emp, selected);
+  const rankIndex = scores.findIndex(x=>x.puesto===selected);
+  document.getElementById("pa-ranking").innerHTML = scores.map((x,i)=>`
+    <div class="pa-rank-row ${x.puesto===selected?'active':''}" data-puesto="${x.puesto.replace(/"/g,'&quot;')}">
+      <div class="pa-pos">#${i+1}</div>
+      <div><div class="pa-role">${x.puesto}</div><div class="pa-bar"><i style="width:${Math.round((x.score||0)*100)}%"></i></div></div>
+      <div class="pa-score" style="color:var(--${paColor(x.score)==='green'?'good':paColor(x.score)==='yellow'?'warn':'bad'})">${paPct(x.score)}</div>
+      <div class="pa-cov">${x.matched}/${x.total}</div>
+    </div>`).join("");
+  document.querySelectorAll(".pa-rank-row").forEach(row=>row.addEventListener("click",()=>{ psel.value=row.dataset.puesto; paRender(); }));
+  document.getElementById("pa-detail-title").textContent = "Detalle · " + (detail.puesto || "Perfil");
+  document.getElementById("pa-detail-sub").innerHTML = `<b>${emp.meta.nombre}</b> · puesto actual: <b>${emp.meta.puesto||"N/D"}</b>. Lectura exclusiva de competencias; los indicadores del one page permanecen sin cambios.`;
+  document.getElementById("pa-kpi-score").textContent = paPct(detail.score);
+  document.getElementById("pa-kpi-score").style.color = `var(--${paColor(detail.score)==='green'?'good':paColor(detail.score)==='yellow'?'warn':'bad'})`;
+  document.getElementById("pa-kpi-rank").textContent = rankIndex>=0 ? "#"+(rankIndex+1) : "N/D";
+  document.getElementById("pa-kpi-coverage").textContent = detail.total ? `${detail.matched}/${detail.total}` : "N/D";
+  const rows = [...(detail.rows||[])].sort((a,b)=>{
+    // Orden único para TODAS las comparativas: mayor apego primero, sin dato al final.
+    const av = (a && !a.missing && isFinite(a.alineacion)) ? Number(a.alineacion) : -1;
+    const bv = (b && !b.missing && isFinite(b.alineacion)) ? Number(b.alineacion) : -1;
+    if(bv !== av) return bv - av;
+    return String(a.competencia||"").localeCompare(String(b.competencia||""), "es", {sensitivity:"base"});
+  });
+  document.getElementById("pa-detail-table").innerHTML = `
+    <table class="pa-comp-table"><thead><tr><th>Tipo</th><th>Competencia</th><th>Resultado</th><th>Requerido</th><th>Apego</th></tr></thead><tbody>
+      ${rows.map(r=>`<tr><td>${r.tipo||""}</td><td>${r.competencia}${r.missing?' <span class="pa-pill red">Sin dato</span>':''}</td><td>${r.resultado===null?'N/D':Number(r.resultado).toFixed(2)}</td><td>${Number(r.requerido).toFixed(1)}</td><td><span class="pa-pill ${paColor(r.alineacion)}">${paPct(r.alineacion)}</span></td></tr>`).join("")}
+    </tbody></table>
+    <div class="pa-note"><b>Criterio:</b> competencias ordenadas de mayor a menor apego. Apego = resultado Pyxoom ÷ nivel requerido del perfil, con tope de 100%. Las competencias sin resultado se consideran brecha para evitar sobreestimar el ajuste.</div>`;
+
+  const gen = paGeneralScore(emp, detail.score);
+  const genEl = document.getElementById("pa-final-score");
+  if(genEl){
+    if(gen.combined===null){
+      genEl.innerHTML = `<div class="pa-final-card"><div class="pa-final-title">Calificación General con perfil seleccionado</div><div class="pa-final-note">No hay suficiente información para integrar el nuevo apego con indicadores.</div></div>`;
+    } else {
+      const k = colorKey(gen.combined);
+      const multTxt = gen.mult!==null && gen.mult<1 ? ` × ${Math.round(gen.mult*100)}% escala` : "";
+      genEl.innerHTML = `
+        <div class="pa-final-card">
+          <div class="pa-final-head">
+            <div>
+              <div class="pa-final-title">Calificación General con perfil seleccionado</div>
+              <div class="pa-final-note" style="border-top:0;padding-top:3px;margin-top:0;">Usa el nuevo apego de <b>${detail.puesto}</b> + sus propios indicadores; no modifica el one page original.</div>
+            </div>
+            <div>
+              <div class="pa-final-score" style="color:${COLOR_VAR[k]}">${fmtPct(gen.combined)}</div>
+              <div class="pa-final-meta">60% indicadores · 40% nuevo apego</div>
+            </div>
+          </div>
+          <div class="pa-final-break">
+            <div class="pa-final-row"><span>Indicadores <small>(Venta vs Año Anterior)</small></span><div>${gen.hardVal!==null ? `${kpiBadge(gen.rawRatio!==null?Math.min(gen.rawRatio,1):0)}${multTxt} → ${kpiBadge(gen.hardVal)}` : '<span class="vs-mini-value">N/D</span>'}</div></div>
+            <div class="pa-final-row"><span>Nuevo apego <small>(${detail.puesto})</small></span><div>${paBadgeHtml(gen.softVal)}</div></div>
+          </div>
+          ${gen.note ? `<div class="pa-final-note">${gen.note}</div>` : `<div class="pa-final-note"><b>Cuenta:</b> (${gen.hardVal!==null?fmtPct(gen.hardVal):'N/D'} × ${Math.round(gen.w.hard*100)}%) + (${gen.softVal!==null?fmtPct(gen.softVal):'N/D'} × ${Math.round(gen.w.soft*100)}%) = <b>${fmtPct(gen.combined)}</b>.</div>`}
+        </div>`;
+    }
+  }
+}
+function paShow(){
+  paPopulate();
+  const empSel = document.getElementById("emp-select");
+  const personSel = document.getElementById("pa-person-select");
+  if(empSel && personSel) personSel.value = empSel.value;
+  viewMode = "perfilamiento";
+  ["export-root","area-export-root","visual-export-root","grafico-export-root"].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display="none"; });
+  const root=document.getElementById("profile-admin-root"); if(root) root.style.display="block";
+  const cc=document.getElementById("colaborador-controls"); if(cc) cc.style.display="none";
+  const ac=document.getElementById("area-controls"); if(ac) ac.style.display="none";
+  const pc=document.getElementById("presentacion-controls"); if(pc) pc.style.display="none";
+  paRender(); window.scrollTo({top:0,behavior:"instant"});
+}
+function paBack(){
+  viewMode = "colaborador";
+  const vm=document.getElementById("view-mode"); if(vm) vm.value="colaborador";
+  const root=document.getElementById("profile-admin-root"); if(root) root.style.display="none";
+  if(typeof applyViewMode === "function") applyViewMode();
+}
+(function(){
+  const btn=document.getElementById("btn-profile-admin"); if(btn) btn.addEventListener("click",paShow);
+  const back=document.getElementById("pa-back"); if(back) back.addEventListener("click",paBack);
+  const ps=document.getElementById("pa-person-select"); if(ps) ps.addEventListener("change",paRender);
+  const pr=document.getElementById("pa-profile-select"); if(pr) pr.addEventListener("change",paRender);
+  const vm=document.getElementById("view-mode"); if(vm) vm.addEventListener("change",()=>{ const root=document.getElementById("profile-admin-root"); if(root) root.style.display="none"; });
+})();
 
 /* =========================================================================
    ACTUALIZAR BASES DESDE EXCEL (en el navegador, sin servidor)
