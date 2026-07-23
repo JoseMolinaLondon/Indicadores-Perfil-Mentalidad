@@ -546,6 +546,33 @@ body.presentation-active #vista-toggle{display:none !important;}
 .pa-pos{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:900;color:var(--muted);}
 .pa-role{font-weight:800;font-size:12.4px;line-height:1.2;}
 .pa-score{text-align:right;font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:17px;}
+
+/* ---------- Plan Individual de Desarrollo (PID) ---------- */
+.pid-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;}
+@media(max-width:980px){.pid-grid{grid-template-columns:1fr;}}
+.pid-foda-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.pid-col-title{margin:0 0 6px;font-size:13px;font-weight:800;}
+.pid-col-title.good{color:var(--good);}
+.pid-col-title.bad{color:var(--bad);}
+.pid-editable-list{list-style:disc;margin:0;padding-left:18px;font-size:12.5px;line-height:1.6;color:var(--ink);min-height:90px;border:1.5px dashed var(--line);border-radius:10px;padding:10px 12px 10px 26px;background:#FAF8F2;outline:none;}
+.pid-editable-list:focus{border-color:var(--amber);background:#FFF8EC;}
+.pid-editable-list li{margin-bottom:4px;}
+.pid-label{display:block;font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:10px 0 4px;}
+.pid-textarea{width:100%;font-family:'Inter',sans-serif;font-size:12.5px;line-height:1.5;border:1.5px solid var(--line);border-radius:10px;padding:9px 11px;resize:vertical;background:#fff;color:var(--ink);}
+.pid-textarea:focus{outline:none;border-color:var(--amber);}
+.pid-table-wrap{overflow-x:auto;}
+.pid-smart-table{width:100%;border-collapse:collapse;font-size:12px;}
+.pid-smart-table th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);border-bottom:2px solid var(--line);padding:6px 8px;}
+.pid-smart-table td{border-bottom:1px solid #EFEDE5;padding:6px 8px;vertical-align:top;}
+.pid-smart-table textarea, .pid-smart-table input, .pid-smart-table select{width:100%;font-family:'Inter',sans-serif;font-size:12px;border:1px solid var(--line);border-radius:7px;padding:5px 7px;background:#fff;color:var(--ink);}
+.pid-smart-table textarea{resize:vertical;min-height:38px;}
+.pid-row-del{background:none;border:none;color:var(--bad);cursor:pointer;font-size:15px;font-weight:800;}
+.pid-actions{margin-top:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.pid-disclaimer{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.5;max-width:900px;}
+.pid-status-pill{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10.5px;font-weight:800;}
+.pid-status-pendiente{background:var(--warn-bg);color:var(--warn);}
+.pid-status-progreso{background:var(--hard-soft);color:var(--hard-deep);}
+.pid-status-completado{background:var(--good-bg);color:var(--good);}
 .pa-cov{text-align:right;font-size:10.5px;color:var(--muted);font-weight:800;}
 .pa-bar{height:10px;background:#EFEAE3;border-radius:8px;overflow:hidden;margin-top:5px;grid-column:2/5;}
 .pa-bar > i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--bad),var(--warn),var(--good));}
@@ -587,7 +614,24 @@ body.presentation-active #vista-toggle{display:none !important;}
           <option value="area">Por Área (Resumen Estratégico)</option>
           <option value="visual">Mapa KPI × Apego</option>
           <option value="grafico">Gráfico Visual · Apego por Competencia</option>
+          <option value="pid">Plan Individual de Desarrollo (PID)</option>
         </select>
+      </div>
+      <div id="pid-controls" style="display: none;">
+        <label for="pid-role-select">Rol de acceso</label><br>
+        <select id="pid-role-select">
+          <option value="colaborador">Colaborador / Jefe Directo</option>
+          <option value="gerente_zona">Gerente de Zona</option>
+          <option value="admin">RH / Dirección (acceso total)</option>
+        </select>
+      </div>
+      <div id="pid-gerente-wrap" style="display: none;">
+        <label for="pid-gerente-select">Gerente de Zona</label><br>
+        <select id="pid-gerente-select"></select>
+      </div>
+      <div id="pid-person-wrap" style="display: none;">
+        <label for="pid-person-select">Colaborador</label><br>
+        <select id="pid-person-select"></select>
       </div>
       <div id="colaborador-controls" style="display: block;">
         <label for="emp-select">Colaborador</label><br>
@@ -1020,6 +1064,72 @@ body.presentation-active #vista-toggle{display:none !important;}
         <div id="pa-final-score"></div>
       </div>
     </div>
+  </div>
+
+  <!-- ===== PLAN INDIVIDUAL DE DESARROLLO (PID) ===== -->
+  <div id="pid-export-root" style="display: none;">
+    <div class="pa-hero">
+      <div>
+        <h2 id="pid-nombre">Plan Individual de Desarrollo</h2>
+        <p id="pid-rol-linea">Selecciona un colaborador para comenzar.</p>
+      </div>
+      <span class="pa-chip" id="pid-role-chip">Colaborador / Jefe Directo</span>
+    </div>
+
+    <div class="pid-grid">
+      <div class="pa-card">
+        <h3>FODA Personal · Fortalezas y Oportunidades</h3>
+        <p class="pa-sub">Generado a partir del apego a competencias del Diccionario LCG vs. el perfil del puesto. Edítalo en conjunto con el colaborador y su jefe directo.</p>
+        <div class="pid-foda-cols">
+          <div>
+            <h4 class="pid-col-title good">💪 Fortalezas</h4>
+            <ul id="pid-fortalezas-personal" class="pid-editable-list" contenteditable="true"></ul>
+          </div>
+          <div>
+            <h4 class="pid-col-title bad">🎯 Oportunidades</h4>
+            <ul id="pid-oportunidades-personal" class="pid-editable-list" contenteditable="true"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pa-card">
+        <h3>FODA del Líder · Observaciones del jefe directo</h3>
+        <p class="pa-sub">Perspectiva del líder sobre el desempeño, actitud y potencial del colaborador.</p>
+        <label class="pid-label">Fortalezas observadas por el líder</label>
+        <textarea id="pid-fortalezas-lider" class="pid-textarea" rows="5" placeholder="Ej. Muestra iniciativa consistente al proponer mejoras en su sucursal..."></textarea>
+        <label class="pid-label">Oportunidades observadas por el líder</label>
+        <textarea id="pid-oportunidades-lider" class="pid-textarea" rows="5" placeholder="Ej. Requiere reforzar el seguimiento a compromisos con su equipo..."></textarea>
+      </div>
+    </div>
+
+    <div class="pa-card" style="margin-top:16px;">
+      <h3>Plan de Acción · Metodología SMART</h3>
+      <p class="pa-sub">Específico · Medible · Alcanzable / con recursos · Relevante (ligado a una competencia) · Tiempo definido.</p>
+      <div class="pid-table-wrap">
+        <table class="pid-smart-table" id="pid-smart-table">
+          <thead>
+            <tr>
+              <th style="width:24%">Objetivo específico</th>
+              <th style="width:16%">Indicador (Medible)</th>
+              <th style="width:18%">Recursos / Apoyo (Alcanzable)</th>
+              <th style="width:16%">Competencia ligada (Relevante)</th>
+              <th style="width:12%">Fecha límite</th>
+              <th style="width:10%">Estatus</th>
+              <th style="width:4%"></th>
+            </tr>
+          </thead>
+          <tbody id="pid-smart-body"></tbody>
+        </table>
+      </div>
+      <button id="pid-add-row" class="export-btn" type="button" style="margin-top:10px;">+ Agregar acción</button>
+    </div>
+
+    <div class="pid-actions">
+      <button id="pid-save" class="export-btn" type="button">💾 Guardar PID (sesión actual)</button>
+      <button id="pid-export-xlsx" class="export-btn update" type="button">⬇ Exportar PID a Excel</button>
+      <span id="pid-save-status" class="update-status"></span>
+    </div>
+    <p class="pid-disclaimer">⚠️ Vista de interfaz: el control de acceso por rol filtra lo que se muestra en pantalla, pero este archivo no tiene un servidor/login real detrás. Úsalo en sesiones 1:1 y exporta/guarda el PID al terminar — los datos no persisten al cerrar la pestaña salvo que exportes.</p>
   </div>
 
   <!-- ===== TABLERO VISUAL ===== -->
@@ -3360,6 +3470,7 @@ function applyViewMode(){
   const isVisual = viewMode === "visual";
   const isColab  = viewMode === "colaborador";
   const isGrafico= viewMode === "grafico";
+  const isPID    = viewMode === "pid";
   const setDisplay = (id, display) => { const el = document.getElementById(id); if(el) el.style.display = display; };
   setDisplay("grafico-export-root", isGrafico ? "block" : "none");
   setDisplay("colaborador-controls", isColab ? "block" : "none");
@@ -3368,6 +3479,10 @@ function applyViewMode(){
   setDisplay("area-export-root", isArea ? "block" : "none");
   setDisplay("visual-export-root", isVisual ? "block" : "none");
   setDisplay("presentacion-controls", isArea ? "block" : "none");
+  setDisplay("pid-controls", isPID ? "block" : "none");
+  setDisplay("pid-export-root", isPID ? "block" : "none");
+  if(!isPID){ setDisplay("pid-gerente-wrap","none"); setDisplay("pid-person-wrap","none"); }
+  if(isPID && typeof initPID === "function"){ initPID(); }
 }
 
 const vmEarly = document.getElementById("view-mode");
@@ -4361,6 +4476,12 @@ function exportFileBase(){
   if(viewMode === "perfilamiento"){
     return `Perfilamiento_Admin_Jomar_${today}`;
   }
+  if(viewMode === "pid"){
+    const emp = (typeof PID_CURRENT_EMP !== "undefined" && PID_CURRENT_EMP) ? PID_CURRENT_EMP : currentEmployee();
+    const baseName = emp && emp.meta && emp.meta.nombre ? emp.meta.nombre : "Colaborador";
+    const slug = baseName.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9]+/g,"_");
+    return `PID_${slug}_${today}`;
+  }
   const emp = currentEmployee();
   const baseName = emp && emp.meta && emp.meta.nombre ? emp.meta.nombre : "Colaborador";
   const slug = baseName.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9]+/g,"_");
@@ -4406,6 +4527,12 @@ function withCanvas(callback){
     const h = Math.ceil(target.scrollHeight + 30);
     opts = { scale: 2, backgroundColor: "#FFFFFF", useCORS: true, width:w, height:h, windowWidth:w, windowHeight:h, scrollX:0, scrollY:0 };
     cleanup = ()=>{ target.classList.remove("gv-exporting"); if(wrap){ wrap.scrollTop = previousScrollTop; wrap.scrollLeft = previousScrollLeft; } };
+  } else if(viewMode === "pid"){
+    target = document.getElementById("pid-export-root");
+    if(!target){ throw new Error("No se encontró el contenedor del Plan Individual de Desarrollo."); }
+    const w = Math.ceil(Math.max(target.scrollWidth, target.offsetWidth, 1180) + 30);
+    const h = Math.ceil(Math.max(target.scrollHeight, target.offsetHeight) + 30);
+    opts = { scale: 2, backgroundColor: "#F6F4EE", useCORS: true, width:w, height:h, windowWidth:w, windowHeight:h, scrollX:0, scrollY:0 };
   } else if(viewMode === "perfilamiento"){
     target = document.getElementById("profile-admin-root");
     const w = Math.ceil(Math.max(target.scrollWidth, target.offsetWidth, 1180) + 30);
@@ -4725,6 +4852,292 @@ function applyClientesRecurrentesFromAux(rows){
       .reduce((s,[,d])=>s + (d.cr && d.cr[i] ? Number(d.cr[i]) : 0),0));
   }
   return touched;
+}
+</script>
+<script>
+/* =========================================================================
+   PLAN INDIVIDUAL DE DESARROLLO (PID)
+   Módulo autocontenido: mapea jefe directo por Zona (dato ya existente),
+   filtra la vista según rol elegido (Colaborador/Jefe, Gerente de Zona,
+   RH/Admin) y arma FODA personal + FODA del líder + Plan de Acción SMART.
+   NOTA: filtra lo que se ve en pantalla; no es un control de acceso con
+   servidor/login real (este archivo sigue siendo HTML estático).
+   ========================================================================= */
+let PID_CURRENT_EMP = null;
+const PID_STORE = {};
+let PID_INITIALIZED = false;
+
+function pidBranchToZone(){
+  const map = {};
+  Object.entries(ZONE_TO_BRANCHES || {}).forEach(([zone, branches])=>{
+    (branches||[]).forEach(b=>{ map[b] = zone; });
+  });
+  return map;
+}
+
+function pidSupervisorFor(emp){
+  if(!emp) return null;
+  const b2z = pidBranchToZone();
+  if(emp.meta.kind === "sucursal"){
+    const zn = b2z[emp.meta.branch];
+    if(!zn) return null;
+    return DATA.find(e=>e.meta.kind==="zona" && String(e.meta.zone)===String(zn)) || null;
+  }
+  if(emp.meta.kind === "zona"){
+    return DATA.find(e=>e.meta.puesto==="Dirección de Ventas") || null;
+  }
+  if(emp.meta.kind === "categoria"){
+    return DATA.find(e=>e.meta.puesto==="Dirección Category Management") || null;
+  }
+  return null;
+}
+
+function pidTeamFor(gerenteEmp){
+  if(!gerenteEmp || gerenteEmp.meta.kind !== "zona") return [];
+  const b2z = pidBranchToZone();
+  return DATA.filter(e=>e.meta.kind==="sucursal" && b2z[e.meta.branch]===gerenteEmp.meta.zone)
+             .sort((a,b)=>a.meta.nombre.localeCompare(b.meta.nombre));
+}
+
+function pidOptionLabel(emp){
+  return emp.meta.nombre + " — " + emp.meta.puesto + (emp.meta.branch ? (" · " + emp.meta.branch) : "");
+}
+
+function pidPopulateFullSelect(selectEl, list){
+  selectEl.innerHTML = "";
+  list.forEach(emp=>{
+    const opt = document.createElement("option");
+    opt.value = emp.id;
+    opt.textContent = pidOptionLabel(emp);
+    selectEl.appendChild(opt);
+  });
+}
+
+function pidPopulateGerenteSelect(){
+  const sel = document.getElementById("pid-gerente-select");
+  const gerentes = DATA.filter(e=>e.meta.kind==="zona").sort((a,b)=>a.meta.nombre.localeCompare(b.meta.nombre));
+  pidPopulateFullSelect(sel, gerentes);
+}
+
+function pidRoleChanged(){
+  const role = document.getElementById("pid-role-select").value;
+  const gerenteWrap = document.getElementById("pid-gerente-wrap");
+  const personWrap = document.getElementById("pid-person-wrap");
+  const personSel = document.getElementById("pid-person-select");
+  const chip = document.getElementById("pid-role-chip");
+  if(role === "gerente_zona"){
+    gerenteWrap.style.display = "block";
+    personWrap.style.display = "block";
+    pidPopulateGerenteSelect();
+    const gerenteSel = document.getElementById("pid-gerente-select");
+    const onGerenteChange = ()=>{
+      const gerente = DATA.find(e=>e.id===gerenteSel.value);
+      const team = pidTeamFor(gerente);
+      const list = gerente ? [gerente].concat(team) : team;
+      pidPopulateFullSelect(personSel, list);
+      renderPID(DATA.find(e=>e.id===personSel.value));
+    };
+    gerenteSel.onchange = onGerenteChange;
+    onGerenteChange();
+    chip.textContent = "Gerente de Zona · ve a su equipo";
+  } else {
+    gerenteWrap.style.display = "none";
+    personWrap.style.display = "block";
+    pidPopulateFullSelect(personSel, DATA);
+    chip.textContent = role === "admin" ? "RH / Dirección · acceso total" : "Colaborador / Jefe Directo";
+    renderPID(DATA.find(e=>e.id===personSel.value));
+  }
+}
+
+function pidGetStore(empId){
+  if(!PID_STORE[empId]){
+    PID_STORE[empId] = { fortalezasPersonal:null, oportunidadesPersonal:null, fortalezasLider:"", oportunidadesLider:"", smart:null };
+  }
+  return PID_STORE[empId];
+}
+
+function pidAutoFoda(emp){
+  const comp = (emp.soft && emp.soft.competencias) ? emp.soft.competencias.slice() : [];
+  const withAlign = comp.filter(c=>c.meta>0);
+  const strengths = withAlign.slice().sort((a,b)=>b.alineacion-a.alineacion).slice(0,5).filter(c=>c.alineacion>=0.95);
+  const opportunities = withAlign.slice().sort((a,b)=>a.alineacion-b.alineacion).slice(0,5).filter(c=>c.alineacion<0.85);
+  return { strengths, opportunities };
+}
+
+function pidRenderEditableList(ulEl, items, fallbackText){
+  ulEl.innerHTML = "";
+  if(!items.length){
+    const li = document.createElement("li");
+    li.textContent = fallbackText;
+    ulEl.appendChild(li);
+    return;
+  }
+  items.forEach(t=>{
+    const li = document.createElement("li");
+    li.textContent = t;
+    ulEl.appendChild(li);
+  });
+}
+
+function pidListToArray(ulEl){
+  return Array.from(ulEl.querySelectorAll("li")).map(li=>li.textContent.trim()).filter(Boolean);
+}
+
+function pidDefaultSmartRows(emp, opportunities){
+  if(opportunities && opportunities.length){
+    return opportunities.slice(0,2).map(o=>({
+      objetivo: "Fortalecer \"" + o.nombre + "\" para acercarse al nivel objetivo del puesto",
+      metrica: "Pasar de " + o.resultado + " a " + o.meta + " en la próxima evaluación de competencias",
+      recursos: "Coaching con jefe directo · capacitación del Diccionario LCG",
+      competencia: o.nombre,
+      fecha: "",
+      estatus: "pendiente"
+    }));
+  }
+  return [{ objetivo:"", metrica:"", recursos:"", competencia:"", fecha:"", estatus:"pendiente" }];
+}
+
+function pidRenderSmartTable(rows){
+  const body = document.getElementById("pid-smart-body");
+  body.innerHTML = "";
+  rows.forEach((row, idx)=>{
+    const tr = document.createElement("tr");
+    const compVal = (row.competencia||"").replace(/"/g,"&quot;");
+    tr.innerHTML =
+      '<td><textarea data-field="objetivo" data-idx="'+idx+'">'+(row.objetivo||"")+'</textarea></td>' +
+      '<td><textarea data-field="metrica" data-idx="'+idx+'">'+(row.metrica||"")+'</textarea></td>' +
+      '<td><textarea data-field="recursos" data-idx="'+idx+'">'+(row.recursos||"")+'</textarea></td>' +
+      '<td><input type="text" data-field="competencia" data-idx="'+idx+'" value="'+compVal+'"></td>' +
+      '<td><input type="date" data-field="fecha" data-idx="'+idx+'" value="'+(row.fecha||"")+'"></td>' +
+      '<td><select data-field="estatus" data-idx="'+idx+'">' +
+        '<option value="pendiente"'+(row.estatus==="pendiente"?" selected":"")+'>Pendiente</option>' +
+        '<option value="progreso"'+(row.estatus==="progreso"?" selected":"")+'>En progreso</option>' +
+        '<option value="completado"'+(row.estatus==="completado"?" selected":"")+'>Completado</option>' +
+      '</select></td>' +
+      '<td><button type="button" class="pid-row-del" data-idx="'+idx+'" title="Eliminar">✕</button></td>';
+    body.appendChild(tr);
+  });
+}
+
+function pidCollectSmartRows(){
+  const body = document.getElementById("pid-smart-body");
+  const rows = [];
+  Array.from(body.querySelectorAll("tr")).forEach(tr=>{
+    const get = f=>{ const el = tr.querySelector('[data-field="'+f+'"]'); return el ? el.value : ""; };
+    rows.push({ objetivo:get("objetivo"), metrica:get("metrica"), recursos:get("recursos"), competencia:get("competencia"), fecha:get("fecha"), estatus:get("estatus") });
+  });
+  return rows;
+}
+
+function renderPID(emp){
+  if(!emp) return;
+  PID_CURRENT_EMP = emp;
+  const store = pidGetStore(emp.id);
+  const sup = pidSupervisorFor(emp);
+
+  document.getElementById("pid-nombre").textContent = emp.meta.nombre;
+  document.getElementById("pid-rol-linea").innerHTML =
+    emp.meta.puesto + " · " + (emp.meta.ambitoLabel||"") + ": <b>" + (emp.meta.ambito||"") + "</b>" +
+    (sup ? " &nbsp;|&nbsp; Jefe directo (por zona): <b>" + sup.meta.nombre + "</b>" : "");
+
+  if(store.fortalezasPersonal === null || store.oportunidadesPersonal === null){
+    const auto = pidAutoFoda(emp);
+    store.fortalezasPersonal = auto.strengths.map(s=>s.nombre + " (alineación " + Math.round(s.alineacion*100) + "%)");
+    store.oportunidadesPersonal = auto.opportunities.map(o=>o.nombre + " (alineación " + Math.round(o.alineacion*100) + "%, meta " + o.meta + ")");
+    if(store.smart === null){ store.smart = pidDefaultSmartRows(emp, auto.opportunities); }
+  }
+  if(store.smart === null){ store.smart = pidDefaultSmartRows(emp, []); }
+
+  pidRenderEditableList(document.getElementById("pid-fortalezas-personal"), store.fortalezasPersonal, "Sin fortalezas destacadas registradas todavía — agrega manualmente.");
+  pidRenderEditableList(document.getElementById("pid-oportunidades-personal"), store.oportunidadesPersonal, "Sin brechas de competencias registradas — agrega manualmente.");
+  document.getElementById("pid-fortalezas-lider").value = store.fortalezasLider || "";
+  document.getElementById("pid-oportunidades-lider").value = store.oportunidadesLider || "";
+  pidRenderSmartTable(store.smart);
+  const st = document.getElementById("pid-save-status"); if(st) st.textContent = "";
+}
+
+function pidPersistCurrentFromDOM(){
+  if(!PID_CURRENT_EMP) return;
+  const store = pidGetStore(PID_CURRENT_EMP.id);
+  store.fortalezasPersonal = pidListToArray(document.getElementById("pid-fortalezas-personal"));
+  store.oportunidadesPersonal = pidListToArray(document.getElementById("pid-oportunidades-personal"));
+  store.fortalezasLider = document.getElementById("pid-fortalezas-lider").value;
+  store.oportunidadesLider = document.getElementById("pid-oportunidades-lider").value;
+  store.smart = pidCollectSmartRows();
+}
+
+function pidExportExcel(){
+  if(!PID_CURRENT_EMP) return;
+  pidPersistCurrentFromDOM();
+  const store = pidGetStore(PID_CURRENT_EMP.id);
+  const sup = pidSupervisorFor(PID_CURRENT_EMP);
+  if(typeof XLSX === "undefined"){ alert("SheetJS no está disponible en este momento."); return; }
+  const wb = XLSX.utils.book_new();
+
+  const infoRows = [
+    ["Plan Individual de Desarrollo — TRANSFORMAR · Jomar Autopartes"],
+    ["Nombre", PID_CURRENT_EMP.meta.nombre],
+    ["Puesto", PID_CURRENT_EMP.meta.puesto],
+    ["Ámbito", PID_CURRENT_EMP.meta.ambito || ""],
+    ["Jefe directo (por zona)", sup ? sup.meta.nombre : ""],
+    ["Fecha de exportación", new Date().toISOString().slice(0,10)],
+    [],
+    ["FODA PERSONAL — Fortalezas"]
+  ].concat(store.fortalezasPersonal.map(t=>["", t]))
+   .concat([[], ["FODA PERSONAL — Oportunidades"]])
+   .concat(store.oportunidadesPersonal.map(t=>["", t]))
+   .concat([
+      [], ["FODA DEL LÍDER — Fortalezas observadas"], ["", store.fortalezasLider || ""],
+      [], ["FODA DEL LÍDER — Oportunidades observadas"], ["", store.oportunidadesLider || ""]
+   ]);
+  const wsInfo = XLSX.utils.aoa_to_sheet(infoRows);
+  XLSX.utils.book_append_sheet(wb, wsInfo, "PID - FODA");
+
+  const smartHeader = ["Objetivo específico","Indicador (Medible)","Recursos / Apoyo (Alcanzable)","Competencia ligada (Relevante)","Fecha límite (Tiempo)","Estatus"];
+  const smartRows = store.smart.map(r=>[r.objetivo,r.metrica,r.recursos,r.competencia,r.fecha,r.estatus]);
+  const wsSmart = XLSX.utils.aoa_to_sheet([smartHeader].concat(smartRows));
+  XLSX.utils.book_append_sheet(wb, wsSmart, "Plan Accion SMART");
+
+  const baseName = PID_CURRENT_EMP.meta.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9]+/g,"_");
+  XLSX.writeFile(wb, "PID_" + baseName + "_" + new Date().toISOString().slice(0,10) + ".xlsx");
+}
+
+function initPID(){
+  if(!PID_INITIALIZED){
+    PID_INITIALIZED = true;
+    document.getElementById("pid-role-select").addEventListener("change", pidRoleChanged);
+    document.getElementById("pid-person-select").addEventListener("change", (e)=>{
+      pidPersistCurrentFromDOM();
+      renderPID(DATA.find(x=>x.id===e.target.value));
+    });
+    document.getElementById("pid-add-row").addEventListener("click", ()=>{
+      pidPersistCurrentFromDOM();
+      const store = pidGetStore(PID_CURRENT_EMP.id);
+      store.smart.push({objetivo:"",metrica:"",recursos:"",competencia:"",fecha:"",estatus:"pendiente"});
+      pidRenderSmartTable(store.smart);
+    });
+    document.getElementById("pid-smart-body").addEventListener("click", (e)=>{
+      if(e.target.classList.contains("pid-row-del")){
+        pidPersistCurrentFromDOM();
+        const store = pidGetStore(PID_CURRENT_EMP.id);
+        const idx = Number(e.target.dataset.idx);
+        store.smart.splice(idx,1);
+        if(!store.smart.length) store.smart.push({objetivo:"",metrica:"",recursos:"",competencia:"",fecha:"",estatus:"pendiente"});
+        pidRenderSmartTable(store.smart);
+      }
+    });
+    document.getElementById("pid-save").addEventListener("click", ()=>{
+      pidPersistCurrentFromDOM();
+      const el = document.getElementById("pid-save-status");
+      el.className = "update-status ok";
+      el.textContent = "Guardado en esta sesión — recuerda exportar antes de cerrar la pestaña.";
+    });
+    document.getElementById("pid-export-xlsx").addEventListener("click", pidExportExcel);
+    document.getElementById("pid-role-select").value = "colaborador";
+    pidRoleChanged();
+  } else if(!PID_CURRENT_EMP){
+    pidRoleChanged();
+  }
 }
 </script>
 
